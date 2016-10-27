@@ -1,0 +1,13 @@
+options:
+  ssh-hostname:
+    type: string
+    default: ""
+    description: "The hostname or IP address of the machine to"
+  ssh-username:
+    type: string
+    default: ""
+    description: "A short description of the configuration option"
+  ssh-password:
+    type: string
+    default: ""
+    description: "A short description of the configuration option"

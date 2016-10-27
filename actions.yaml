@@ -1,0 +1,9 @@
+run:
+  description: "Run an arbitrary command"
+  params:
+    command:
+      description: "The command to execute."
+      type: string
+      default: ""
+  required:
+    - command

@@ -1,0 +1,1274 @@
+{
+  "layers": [
+    "layer:basic", 
+    "sshproxy", 
+    "build"
+  ], 
+  "signatures": {
+    "bin/layer_option": [
+      "layer:basic", 
+      "static", 
+      "621b556cd208005e131e9f648859294347da9376609745a73ca2e808dd2032f9"
+    ], 
+    "hooks/leader-settings-changed": [
+      "layer:basic", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/bin/layer_option": [
+      "sshproxy", 
+      "static", 
+      "621b556cd208005e131e9f648859294347da9376609745a73ca2e808dd2032f9"
+    ], 
+    "hooks/leader-elected": [
+      "layer:basic", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/wheelhouse/MarkupSafe-0.23.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "a4ec1aff59b95a14b45eb2e23761a0179e98319da5a7eb76b56ea8cdc7b871c3"
+    ], 
+    "reactive/__init__.py": [
+      "layer:basic", 
+      "static", 
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/hooks/leader-elected": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "actions/run": [
+      "sshproxy", 
+      "static", 
+      "25cdb191a5b6d9fe6f3b424a818e6303e15c2c5b0239fa81d3f8d81d1c8b78d9"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/hooks/leader-settings-changed": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/wheelhouse.txt": [
+      "sshproxy", 
+      "static", 
+      "2f19b10e72d7299f4fc53c33caa0ad425ebcef59231238b49bc45b10ab49ae16"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/wheelhouse/pip-8.1.2.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "4d24b03ffa67638a3fa931c09fd9e0273ffa904e95ebebe7d4b1a54c93d7b732"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/wheelhouse/pyaml-16.9.0.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "f8d394144d3bc5360cd48f54bfaa2d100a47040216d6f8703c17bd4b235e9bb3"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/README.md": [
+      "sshproxy", 
+      "static", 
+      "83d8c3dbf1dd3be70ba9774a16780d130ebdcfc722d89d86ed596e7feac70c9f"
+    ], 
+    "deps/layer/layer-basic/wheelhouse.txt": [
+      "sshproxy", 
+      "static", 
+      "2f19b10e72d7299f4fc53c33caa0ad425ebcef59231238b49bc45b10ab49ae16"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/wheelhouse/charmhelpers-0.9.1.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "60de745f3ff1424b9aa294c9d28d0b863f0827314331f330264ecc9a89142218"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/reactive/__init__.py": [
+      "sshproxy", 
+      "static", 
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/lib/charms/layer/basic.py": [
+      "sshproxy", 
+      "static", 
+      "32204327952d4ea4ef1063f45bdbe7be379a7a7b8220f3e5f2f5e11003b25654"
+    ], 
+    "copyright": [
+      "layer:basic", 
+      "static", 
+      "1e2afbd75c71affa132ae7ee3327cb29b5e4b9d9705f27dfd03857c326f50c5c"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/hooks/install": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/layer.yaml": [
+      "sshproxy", 
+      "static", 
+      "fbd3e3a22f3b8b1e7656e12f5db0ebf69c145b8e8b59c125e6faf043cba50b9b"
+    ], 
+    "wheelhouse/PyYAML-3.12.tar.gz": [
+      "layer:basic", 
+      "dynamic", 
+      "592766c6303207a20efc445587778322d7f73b161bd994f227adaa341ba212ab"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/Makefile": [
+      "sshproxy", 
+      "static", 
+      "b7ab3a34e5faf79b96a8632039a0ad0aa87f2a9b5f0ba604e007cafb22190301"
+    ], 
+    ".gitignore": [
+      "layer:basic", 
+      "static", 
+      "0da5c4dcda27cd6406e5bb81cbf68ddccaf728ac764ec15053a165c1449d87d9"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/metadata.yaml": [
+      "sshproxy", 
+      "static", 
+      "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    ], 
+    "trusty/sshproxy/wheelhouse/charmhelpers-0.9.1.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "60de745f3ff1424b9aa294c9d28d0b863f0827314331f330264ecc9a89142218"
+    ], 
+    "wheelhouse/MarkupSafe-0.23.tar.gz": [
+      "layer:basic", 
+      "dynamic", 
+      "a4ec1aff59b95a14b45eb2e23761a0179e98319da5a7eb76b56ea8cdc7b871c3"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/hooks/update-status": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/hooks/leader-settings-changed": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/wheelhouse/charms.reactive-0.4.5.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "b2a475aff349a1c6532de0f9b4df5ee456b97a1e1755695afd8747dbc51bb710"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/hooks/config-changed": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/hooks/update-status": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "deps/layer/layer-basic/metadata.yaml": [
+      "sshproxy", 
+      "static", 
+      "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/layer.yaml": [
+      "sshproxy", 
+      "static", 
+      "6f8c78ce7424ab4548d8d2fa792321c174aa527866f6145e694e5535b4a2bf62"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/bin/layer_option": [
+      "sshproxy", 
+      "static", 
+      "621b556cd208005e131e9f648859294347da9376609745a73ca2e808dd2032f9"
+    ], 
+    "hooks/hook.template": [
+      "layer:basic", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/.gitignore": [
+      "sshproxy", 
+      "static", 
+      "0da5c4dcda27cd6406e5bb81cbf68ddccaf728ac764ec15053a165c1449d87d9"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/actions/run": [
+      "sshproxy", 
+      "static", 
+      "25cdb191a5b6d9fe6f3b424a818e6303e15c2c5b0239fa81d3f8d81d1c8b78d9"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/hooks/leader-elected": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/README.md": [
+      "sshproxy", 
+      "static", 
+      "475d0f6ab94c1c7ffdeaf937dbd611b42ac86be8b7110cf387791f613ad09889"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/requirements.txt": [
+      "sshproxy", 
+      "static", 
+      "0f1c70d27e26005a96d66ad54482877ae20f7737693c833e29dd72bd6ac24892"
+    ], 
+    "deps/layer/layer-basic/hooks/leader-settings-changed": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "wheelhouse/pyaml-16.9.0.tar.gz": [
+      "layer:basic", 
+      "dynamic", 
+      "f8d394144d3bc5360cd48f54bfaa2d100a47040216d6f8703c17bd4b235e9bb3"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/bin/layer_option": [
+      "sshproxy", 
+      "static", 
+      "621b556cd208005e131e9f648859294347da9376609745a73ca2e808dd2032f9"
+    ], 
+    "deps/layer/layer-basic/hooks/leader-elected": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "tests/00-setup": [
+      "sshproxy", 
+      "static", 
+      "111c079b81d260bbcd716dcf41672372a4cf4aaa14154b6c3055deeedae37a06"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/.gitignore": [
+      "sshproxy", 
+      "static", 
+      "0da5c4dcda27cd6406e5bb81cbf68ddccaf728ac764ec15053a165c1449d87d9"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/README.ex": [
+      "sshproxy", 
+      "static", 
+      "eb25333fb6ee2abc2d5dde329dfd6b4b2a6dd5516094e75354fb6cd84010afad"
+    ], 
+    "deps/layer/layer-basic/tox.ini": [
+      "sshproxy", 
+      "static", 
+      "00b57a776ac313e92a52daa05d1fdb6056c21b3105b643d32610fd937664321b"
+    ], 
+    "trusty/sshproxy/layer.yaml": [
+      "sshproxy", 
+      "static", 
+      "6f8c78ce7424ab4548d8d2fa792321c174aa527866f6145e694e5535b4a2bf62"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/reactive/sshproxy.py": [
+      "sshproxy", 
+      "static", 
+      "0f7ff94f01143ff259ad8cf4076c47d9126889c31d8b0a094842697901a00085"
+    ], 
+    "deps/layer/layer-basic/requirements.txt": [
+      "sshproxy", 
+      "static", 
+      "0f1c70d27e26005a96d66ad54482877ae20f7737693c833e29dd72bd6ac24892"
+    ], 
+    "reactive/sshproxy.py": [
+      "sshproxy", 
+      "static", 
+      "3c1ee9470d504defdfa0629aa437c1bea01769ec69ed222e0e62ae1fa3e05b77"
+    ], 
+    "requirements.txt": [
+      "layer:basic", 
+      "static", 
+      "0f1c70d27e26005a96d66ad54482877ae20f7737693c833e29dd72bd6ac24892"
+    ], 
+    "trusty/sshproxy/metadata.yaml": [
+      "sshproxy", 
+      "static", 
+      "79b2435a0a509b7ba33d89ac1bd02fb3738653c1f75d6246ccdfa20f21d69e4f"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/copyright": [
+      "sshproxy", 
+      "static", 
+      "1e2afbd75c71affa132ae7ee3327cb29b5e4b9d9705f27dfd03857c326f50c5c"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/metadata.yaml": [
+      "sshproxy", 
+      "static", 
+      "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/wheelhouse/PyYAML-3.12.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "592766c6303207a20efc445587778322d7f73b161bd994f227adaa341ba212ab"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/hooks/leader-settings-changed": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/hooks/upgrade-charm": [
+      "sshproxy", 
+      "static", 
+      "8b9c153a61cc78067af8d016a8fa1c764caad3a40c82bb0b5121fc4c4c6a04f1"
+    ], 
+    "trusty/sshproxy/wheelhouse/netaddr-0.7.18.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "a1f5c9fcf75ac2579b9995c843dade33009543c04f218ff7c007b3c81695bd19"
+    ], 
+    "deps/layer/layer-basic/copyright": [
+      "sshproxy", 
+      "static", 
+      "1e2afbd75c71affa132ae7ee3327cb29b5e4b9d9705f27dfd03857c326f50c5c"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/.build.manifest": [
+      "sshproxy", 
+      "static", 
+      "6f8b102e3b649272e7eacbb12e1afa0b5b1423277c96d8a70909f6317400ca00"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/reactive/__init__.py": [
+      "sshproxy", 
+      "static", 
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ], 
+    "deps/layer/layer-basic/hooks/install": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "Makefile": [
+      "layer:basic", 
+      "static", 
+      "b7ab3a34e5faf79b96a8632039a0ad0aa87f2a9b5f0ba604e007cafb22190301"
+    ], 
+    "trusty/sshproxy/reactive/__init__.py": [
+      "sshproxy", 
+      "static", 
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/lib/charms/layer/execd.py": [
+      "sshproxy", 
+      "static", 
+      "c0eb4c90e93a14f04d851f78bc6592e093226321fbe328125958633397aed014"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/bin/layer_option": [
+      "sshproxy", 
+      "static", 
+      "621b556cd208005e131e9f648859294347da9376609745a73ca2e808dd2032f9"
+    ], 
+    "wheelhouse/Tempita-0.5.2.tar.gz": [
+      "layer:basic", 
+      "dynamic", 
+      "cacecf0baa674d356641f1d406b8bff1d756d739c46b869a54de515d08e6fc9c"
+    ], 
+    "trusty/sshproxy/README.md": [
+      "sshproxy", 
+      "static", 
+      "475d0f6ab94c1c7ffdeaf937dbd611b42ac86be8b7110cf387791f613ad09889"
+    ], 
+    "trusty/sshproxy/wheelhouse/pip-8.1.2.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "4d24b03ffa67638a3fa931c09fd9e0273ffa904e95ebebe7d4b1a54c93d7b732"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/config.yaml": [
+      "sshproxy", 
+      "static", 
+      "2b2d549d971fea775f23b33e37aaf3a84726de4ffd9a7427748b268d80ca1dcd"
+    ], 
+    "trusty/sshproxy/actions.yaml": [
+      "sshproxy", 
+      "static", 
+      "861a120bf3ac382f1fe57db4e7ea04d3c22ab3cacbf3d519d869d4acaecbbfae"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/hooks/install": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/wheelhouse/Tempita-0.5.2.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "cacecf0baa674d356641f1d406b8bff1d756d739c46b869a54de515d08e6fc9c"
+    ], 
+    "actions.yaml": [
+      "sshproxy", 
+      "dynamic", 
+      "861a120bf3ac382f1fe57db4e7ea04d3c22ab3cacbf3d519d869d4acaecbbfae"
+    ], 
+    "wheelhouse/netaddr-0.7.18.tar.gz": [
+      "layer:basic", 
+      "dynamic", 
+      "a1f5c9fcf75ac2579b9995c843dade33009543c04f218ff7c007b3c81695bd19"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/lib/charms/layer/execd.py": [
+      "sshproxy", 
+      "static", 
+      "c0eb4c90e93a14f04d851f78bc6592e093226321fbe328125958633397aed014"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/bin/layer_option": [
+      "sshproxy", 
+      "static", 
+      "621b556cd208005e131e9f648859294347da9376609745a73ca2e808dd2032f9"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/wheelhouse/pyaml-16.9.0.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "f8d394144d3bc5360cd48f54bfaa2d100a47040216d6f8703c17bd4b235e9bb3"
+    ], 
+    "deps/layer/layer-basic/bin/layer_option": [
+      "sshproxy", 
+      "static", 
+      "621b556cd208005e131e9f648859294347da9376609745a73ca2e808dd2032f9"
+    ], 
+    "deps/layer/layer-basic/hooks/config-changed": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/reactive/__init__.py": [
+      "sshproxy", 
+      "static", 
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/lib/charms/layer/__init__.py": [
+      "sshproxy", 
+      "static", 
+      "4ffd74384bd81d737572acf2d14fe55431eab8f49d6212d9aabedf24e1d992b2"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/.build.manifest": [
+      "sshproxy", 
+      "static", 
+      "6f8b102e3b649272e7eacbb12e1afa0b5b1423277c96d8a70909f6317400ca00"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/.gitignore": [
+      "sshproxy", 
+      "static", 
+      "0da5c4dcda27cd6406e5bb81cbf68ddccaf728ac764ec15053a165c1449d87d9"
+    ], 
+    "trusty/sshproxy/tox.ini": [
+      "sshproxy", 
+      "static", 
+      "00b57a776ac313e92a52daa05d1fdb6056c21b3105b643d32610fd937664321b"
+    ], 
+    "trusty/sshproxy/hooks/hook.template": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/hooks/upgrade-charm": [
+      "sshproxy", 
+      "static", 
+      "8b9c153a61cc78067af8d016a8fa1c764caad3a40c82bb0b5121fc4c4c6a04f1"
+    ], 
+    "lib/charms/layer/__init__.py": [
+      "layer:basic", 
+      "static", 
+      "4ffd74384bd81d737572acf2d14fe55431eab8f49d6212d9aabedf24e1d992b2"
+    ], 
+    "hooks/stop": [
+      "layer:basic", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/Makefile": [
+      "sshproxy", 
+      "static", 
+      "b7ab3a34e5faf79b96a8632039a0ad0aa87f2a9b5f0ba604e007cafb22190301"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/layer.yaml": [
+      "sshproxy", 
+      "static", 
+      "fbd3e3a22f3b8b1e7656e12f5db0ebf69c145b8e8b59c125e6faf043cba50b9b"
+    ], 
+    "trusty/sshproxy/wheelhouse/six-1.10.0.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "105f8d68616f8248e24bf0e9372ef04d3cc10104f1980f54d57b2ce73a5ad56a"
+    ], 
+    "trusty/sshproxy/reactive/sshproxy.py": [
+      "sshproxy", 
+      "static", 
+      "3c1ee9470d504defdfa0629aa437c1bea01769ec69ed222e0e62ae1fa3e05b77"
+    ], 
+    "trusty/sshproxy/lib/charms/layer/execd.py": [
+      "sshproxy", 
+      "static", 
+      "c0eb4c90e93a14f04d851f78bc6592e093226321fbe328125958633397aed014"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/wheelhouse.txt": [
+      "sshproxy", 
+      "static", 
+      "2f19b10e72d7299f4fc53c33caa0ad425ebcef59231238b49bc45b10ab49ae16"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/reactive/__init__.py": [
+      "sshproxy", 
+      "static", 
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/metadata.yaml": [
+      "sshproxy", 
+      "static", 
+      "b85581df81bdb58ab498e33957a31d7cb9ee3b2d354aa9021204a3a31d649284"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/icon.svg": [
+      "sshproxy", 
+      "static", 
+      "085f367baa9c4ec724561b6e0d5d167c14c4295d6311b719a57729a17ac025c7"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/tox.ini": [
+      "sshproxy", 
+      "static", 
+      "00b57a776ac313e92a52daa05d1fdb6056c21b3105b643d32610fd937664321b"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/hooks/hook.template": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "deps/layer/layer-basic/lib/charms/layer/__init__.py": [
+      "sshproxy", 
+      "static", 
+      "4ffd74384bd81d737572acf2d14fe55431eab8f49d6212d9aabedf24e1d992b2"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/tests/10-deploy": [
+      "sshproxy", 
+      "static", 
+      "2ba75d812122f23e933197b26fed3d5673986a2ce0b6eeab916776fe0e1ff911"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/actions.yaml": [
+      "sshproxy", 
+      "static", 
+      "861a120bf3ac382f1fe57db4e7ea04d3c22ab3cacbf3d519d869d4acaecbbfae"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/lib/charms/layer/basic.py": [
+      "sshproxy", 
+      "static", 
+      "32204327952d4ea4ef1063f45bdbe7be379a7a7b8220f3e5f2f5e11003b25654"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/hooks/upgrade-charm": [
+      "sshproxy", 
+      "static", 
+      "8b9c153a61cc78067af8d016a8fa1c764caad3a40c82bb0b5121fc4c4c6a04f1"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/hooks/config-changed": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/Makefile": [
+      "sshproxy", 
+      "static", 
+      "b7ab3a34e5faf79b96a8632039a0ad0aa87f2a9b5f0ba604e007cafb22190301"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/hooks/hook.template": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "hooks/start": [
+      "layer:basic", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/hooks/start": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/hooks/leader-settings-changed": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/tests/10-deploy": [
+      "sshproxy", 
+      "static", 
+      "2ba75d812122f23e933197b26fed3d5673986a2ce0b6eeab916776fe0e1ff911"
+    ], 
+    "trusty/sshproxy/hooks/config-changed": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "wheelhouse/charmhelpers-0.9.1.tar.gz": [
+      "layer:basic", 
+      "dynamic", 
+      "60de745f3ff1424b9aa294c9d28d0b863f0827314331f330264ecc9a89142218"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/lib/charms/layer/execd.py": [
+      "sshproxy", 
+      "static", 
+      "c0eb4c90e93a14f04d851f78bc6592e093226321fbe328125958633397aed014"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/wheelhouse/charmhelpers-0.9.1.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "60de745f3ff1424b9aa294c9d28d0b863f0827314331f330264ecc9a89142218"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/README.md": [
+      "sshproxy", 
+      "static", 
+      "83d8c3dbf1dd3be70ba9774a16780d130ebdcfc722d89d86ed596e7feac70c9f"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/hooks/update-status": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "wheelhouse/six-1.10.0.tar.gz": [
+      "layer:basic", 
+      "dynamic", 
+      "105f8d68616f8248e24bf0e9372ef04d3cc10104f1980f54d57b2ce73a5ad56a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/hooks/hook.template": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/hooks/leader-elected": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/layer.yaml": [
+      "sshproxy", 
+      "static", 
+      "fbd3e3a22f3b8b1e7656e12f5db0ebf69c145b8e8b59c125e6faf043cba50b9b"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/actions.yaml": [
+      "sshproxy", 
+      "static", 
+      "861a120bf3ac382f1fe57db4e7ea04d3c22ab3cacbf3d519d869d4acaecbbfae"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/hooks/upgrade-charm": [
+      "sshproxy", 
+      "static", 
+      "8b9c153a61cc78067af8d016a8fa1c764caad3a40c82bb0b5121fc4c4c6a04f1"
+    ], 
+    "wheelhouse/Jinja2-2.8.tar.gz": [
+      "layer:basic", 
+      "dynamic", 
+      "bc1ff2ff88dbfacefde4ddde471d1417d3b304e8df103a7a9437d47269201bf4"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/lib/charms/layer/basic.py": [
+      "sshproxy", 
+      "static", 
+      "32204327952d4ea4ef1063f45bdbe7be379a7a7b8220f3e5f2f5e11003b25654"
+    ], 
+    "trusty/sshproxy/hooks/install": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/wheelhouse/pip-8.1.2.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "4d24b03ffa67638a3fa931c09fd9e0273ffa904e95ebebe7d4b1a54c93d7b732"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/wheelhouse/Jinja2-2.8.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "bc1ff2ff88dbfacefde4ddde471d1417d3b304e8df103a7a9437d47269201bf4"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/hooks/leader-elected": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/.gitignore": [
+      "sshproxy", 
+      "static", 
+      "0da5c4dcda27cd6406e5bb81cbf68ddccaf728ac764ec15053a165c1449d87d9"
+    ], 
+    "deps/layer/layer-basic/README.md": [
+      "sshproxy", 
+      "static", 
+      "83d8c3dbf1dd3be70ba9774a16780d130ebdcfc722d89d86ed596e7feac70c9f"
+    ], 
+    "trusty/sshproxy/wheelhouse/Jinja2-2.8.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "bc1ff2ff88dbfacefde4ddde471d1417d3b304e8df103a7a9437d47269201bf4"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/wheelhouse/Tempita-0.5.2.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "cacecf0baa674d356641f1d406b8bff1d756d739c46b869a54de515d08e6fc9c"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/layer.yaml": [
+      "sshproxy", 
+      "static", 
+      "6f8c78ce7424ab4548d8d2fa792321c174aa527866f6145e694e5535b4a2bf62"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/wheelhouse/Tempita-0.5.2.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "cacecf0baa674d356641f1d406b8bff1d756d739c46b869a54de515d08e6fc9c"
+    ], 
+    "trusty/sshproxy/actions/run": [
+      "sshproxy", 
+      "static", 
+      "25cdb191a5b6d9fe6f3b424a818e6303e15c2c5b0239fa81d3f8d81d1c8b78d9"
+    ], 
+    "trusty/sshproxy/lib/charms/layer/basic.py": [
+      "sshproxy", 
+      "static", 
+      "32204327952d4ea4ef1063f45bdbe7be379a7a7b8220f3e5f2f5e11003b25654"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/wheelhouse/six-1.10.0.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "105f8d68616f8248e24bf0e9372ef04d3cc10104f1980f54d57b2ce73a5ad56a"
+    ], 
+    "trusty/sshproxy/.gitignore": [
+      "sshproxy", 
+      "static", 
+      "0da5c4dcda27cd6406e5bb81cbf68ddccaf728ac764ec15053a165c1449d87d9"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/requirements.txt": [
+      "sshproxy", 
+      "static", 
+      "0f1c70d27e26005a96d66ad54482877ae20f7737693c833e29dd72bd6ac24892"
+    ], 
+    "hooks/install": [
+      "layer:basic", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/copyright": [
+      "sshproxy", 
+      "static", 
+      "1e2afbd75c71affa132ae7ee3327cb29b5e4b9d9705f27dfd03857c326f50c5c"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/tox.ini": [
+      "sshproxy", 
+      "static", 
+      "00b57a776ac313e92a52daa05d1fdb6056c21b3105b643d32610fd937664321b"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/copyright": [
+      "sshproxy", 
+      "static", 
+      "1e2afbd75c71affa132ae7ee3327cb29b5e4b9d9705f27dfd03857c326f50c5c"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/lib/charms/layer/basic.py": [
+      "sshproxy", 
+      "static", 
+      "32204327952d4ea4ef1063f45bdbe7be379a7a7b8220f3e5f2f5e11003b25654"
+    ], 
+    "deps/layer/layer-basic/hooks/hook.template": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/hooks/upgrade-charm": [
+      "sshproxy", 
+      "static", 
+      "8b9c153a61cc78067af8d016a8fa1c764caad3a40c82bb0b5121fc4c4c6a04f1"
+    ], 
+    "config.yaml": [
+      "sshproxy", 
+      "dynamic", 
+      "2b2d549d971fea775f23b33e37aaf3a84726de4ffd9a7427748b268d80ca1dcd"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/copyright": [
+      "sshproxy", 
+      "static", 
+      "1e2afbd75c71affa132ae7ee3327cb29b5e4b9d9705f27dfd03857c326f50c5c"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/.gitignore": [
+      "sshproxy", 
+      "static", 
+      "0da5c4dcda27cd6406e5bb81cbf68ddccaf728ac764ec15053a165c1449d87d9"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/hooks/stop": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/requirements.txt": [
+      "sshproxy", 
+      "static", 
+      "0f1c70d27e26005a96d66ad54482877ae20f7737693c833e29dd72bd6ac24892"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/hooks/update-status": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/hooks/start": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/lib/charms/layer/execd.py": [
+      "sshproxy", 
+      "static", 
+      "c0eb4c90e93a14f04d851f78bc6592e093226321fbe328125958633397aed014"
+    ], 
+    "deps/layer/layer-basic/.gitignore": [
+      "sshproxy", 
+      "static", 
+      "0da5c4dcda27cd6406e5bb81cbf68ddccaf728ac764ec15053a165c1449d87d9"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/lib/charms/layer/basic.py": [
+      "sshproxy", 
+      "static", 
+      "32204327952d4ea4ef1063f45bdbe7be379a7a7b8220f3e5f2f5e11003b25654"
+    ], 
+    "wheelhouse/pip-8.1.2.tar.gz": [
+      "layer:basic", 
+      "dynamic", 
+      "4d24b03ffa67638a3fa931c09fd9e0273ffa904e95ebebe7d4b1a54c93d7b732"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/hooks/stop": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "hooks/update-status": [
+      "layer:basic", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/lib/charms/layer/__init__.py": [
+      "sshproxy", 
+      "static", 
+      "4ffd74384bd81d737572acf2d14fe55431eab8f49d6212d9aabedf24e1d992b2"
+    ], 
+    "README.md": [
+      "sshproxy", 
+      "static", 
+      "475d0f6ab94c1c7ffdeaf937dbd611b42ac86be8b7110cf387791f613ad09889"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/hooks/config-changed": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "deps/layer/layer-basic/hooks/stop": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/copyright": [
+      "sshproxy", 
+      "static", 
+      "1e2afbd75c71affa132ae7ee3327cb29b5e4b9d9705f27dfd03857c326f50c5c"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/wheelhouse/MarkupSafe-0.23.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "a4ec1aff59b95a14b45eb2e23761a0179e98319da5a7eb76b56ea8cdc7b871c3"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/requirements.txt": [
+      "sshproxy", 
+      "static", 
+      "0f1c70d27e26005a96d66ad54482877ae20f7737693c833e29dd72bd6ac24892"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/hooks/leader-elected": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/hooks/config-changed": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/wheelhouse/netaddr-0.7.18.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "a1f5c9fcf75ac2579b9995c843dade33009543c04f218ff7c007b3c81695bd19"
+    ], 
+    "trusty/sshproxy/lib/charms/layer/__init__.py": [
+      "sshproxy", 
+      "static", 
+      "4ffd74384bd81d737572acf2d14fe55431eab8f49d6212d9aabedf24e1d992b2"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/wheelhouse/netaddr-0.7.18.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "a1f5c9fcf75ac2579b9995c843dade33009543c04f218ff7c007b3c81695bd19"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/metadata.yaml": [
+      "sshproxy", 
+      "static", 
+      "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356"
+    ], 
+    ".build.manifest": [
+      "build", 
+      "dynamic", 
+      "unchecked"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/wheelhouse/Jinja2-2.8.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "bc1ff2ff88dbfacefde4ddde471d1417d3b304e8df103a7a9437d47269201bf4"
+    ], 
+    "trusty/sshproxy/hooks/start": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/hooks/stop": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/tox.ini": [
+      "sshproxy", 
+      "static", 
+      "00b57a776ac313e92a52daa05d1fdb6056c21b3105b643d32610fd937664321b"
+    ], 
+    "tests/10-deploy": [
+      "sshproxy", 
+      "static", 
+      "2ba75d812122f23e933197b26fed3d5673986a2ce0b6eeab916776fe0e1ff911"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/hooks/leader-elected": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "lib/charms/layer/execd.py": [
+      "layer:basic", 
+      "static", 
+      "c0eb4c90e93a14f04d851f78bc6592e093226321fbe328125958633397aed014"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/wheelhouse/charms.reactive-0.4.5.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "b2a475aff349a1c6532de0f9b4df5ee456b97a1e1755695afd8747dbc51bb710"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/metadata.yaml": [
+      "sshproxy", 
+      "static", 
+      "b85581df81bdb58ab498e33957a31d7cb9ee3b2d354aa9021204a3a31d649284"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/hooks/install": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/reactive/__init__.py": [
+      "sshproxy", 
+      "static", 
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/hooks/update-status": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/Makefile": [
+      "sshproxy", 
+      "static", 
+      "b7ab3a34e5faf79b96a8632039a0ad0aa87f2a9b5f0ba604e007cafb22190301"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/wheelhouse/charms.reactive-0.4.5.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "b2a475aff349a1c6532de0f9b4df5ee456b97a1e1755695afd8747dbc51bb710"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/bin/layer_option": [
+      "sshproxy", 
+      "static", 
+      "621b556cd208005e131e9f648859294347da9376609745a73ca2e808dd2032f9"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/hooks/start": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "deps/layer/layer-basic/lib/charms/layer/execd.py": [
+      "sshproxy", 
+      "static", 
+      "c0eb4c90e93a14f04d851f78bc6592e093226321fbe328125958633397aed014"
+    ], 
+    "hooks/upgrade-charm": [
+      "layer:basic", 
+      "static", 
+      "8b9c153a61cc78067af8d016a8fa1c764caad3a40c82bb0b5121fc4c4c6a04f1"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/hooks/stop": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/icon.svg": [
+      "sshproxy", 
+      "static", 
+      "085f367baa9c4ec724561b6e0d5d167c14c4295d6311b719a57729a17ac025c7"
+    ], 
+    "deps/layer/layer-basic/hooks/update-status": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/tests/10-deploy": [
+      "sshproxy", 
+      "static", 
+      "2ba75d812122f23e933197b26fed3d5673986a2ce0b6eeab916776fe0e1ff911"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/Makefile": [
+      "sshproxy", 
+      "static", 
+      "b7ab3a34e5faf79b96a8632039a0ad0aa87f2a9b5f0ba604e007cafb22190301"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/copyright": [
+      "sshproxy", 
+      "static", 
+      "1e2afbd75c71affa132ae7ee3327cb29b5e4b9d9705f27dfd03857c326f50c5c"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/README.md": [
+      "sshproxy", 
+      "static", 
+      "83d8c3dbf1dd3be70ba9774a16780d130ebdcfc722d89d86ed596e7feac70c9f"
+    ], 
+    "tox.ini": [
+      "layer:basic", 
+      "static", 
+      "00b57a776ac313e92a52daa05d1fdb6056c21b3105b643d32610fd937664321b"
+    ], 
+    "metadata.yaml": [
+      "sshproxy", 
+      "dynamic", 
+      "79b2435a0a509b7ba33d89ac1bd02fb3738653c1f75d6246ccdfa20f21d69e4f"
+    ], 
+    "trusty/sshproxy/wheelhouse/MarkupSafe-0.23.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "a4ec1aff59b95a14b45eb2e23761a0179e98319da5a7eb76b56ea8cdc7b871c3"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/tests/00-setup": [
+      "sshproxy", 
+      "static", 
+      "111c079b81d260bbcd716dcf41672372a4cf4aaa14154b6c3055deeedae37a06"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/wheelhouse/six-1.10.0.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "105f8d68616f8248e24bf0e9372ef04d3cc10104f1980f54d57b2ce73a5ad56a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/lib/charms/layer/__init__.py": [
+      "sshproxy", 
+      "static", 
+      "4ffd74384bd81d737572acf2d14fe55431eab8f49d6212d9aabedf24e1d992b2"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/tests/00-setup": [
+      "sshproxy", 
+      "static", 
+      "111c079b81d260bbcd716dcf41672372a4cf4aaa14154b6c3055deeedae37a06"
+    ], 
+    "trusty/sshproxy/requirements.txt": [
+      "sshproxy", 
+      "static", 
+      "0f1c70d27e26005a96d66ad54482877ae20f7737693c833e29dd72bd6ac24892"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/hooks/stop": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/lib/charms/layer/execd.py": [
+      "sshproxy", 
+      "static", 
+      "c0eb4c90e93a14f04d851f78bc6592e093226321fbe328125958633397aed014"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/actions/run": [
+      "sshproxy", 
+      "static", 
+      "25cdb191a5b6d9fe6f3b424a818e6303e15c2c5b0239fa81d3f8d81d1c8b78d9"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/hooks/install": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/README.ex": [
+      "sshproxy", 
+      "static", 
+      "eb25333fb6ee2abc2d5dde329dfd6b4b2a6dd5516094e75354fb6cd84010afad"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/hooks/config-changed": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "deps/layer/layer-basic/lib/charms/layer/basic.py": [
+      "sshproxy", 
+      "static", 
+      "32204327952d4ea4ef1063f45bdbe7be379a7a7b8220f3e5f2f5e11003b25654"
+    ], 
+    "trusty/sshproxy/config.yaml": [
+      "sshproxy", 
+      "static", 
+      "2b2d549d971fea775f23b33e37aaf3a84726de4ffd9a7427748b268d80ca1dcd"
+    ], 
+    "trusty/sshproxy/.build.manifest": [
+      "sshproxy", 
+      "static", 
+      "6f8b102e3b649272e7eacbb12e1afa0b5b1423277c96d8a70909f6317400ca00"
+    ], 
+    "hooks/config-changed": [
+      "layer:basic", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/hooks/upgrade-charm": [
+      "sshproxy", 
+      "static", 
+      "8b9c153a61cc78067af8d016a8fa1c764caad3a40c82bb0b5121fc4c4c6a04f1"
+    ], 
+    "deps/layer/layer-basic/Makefile": [
+      "sshproxy", 
+      "static", 
+      "b7ab3a34e5faf79b96a8632039a0ad0aa87f2a9b5f0ba604e007cafb22190301"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/requirements.txt": [
+      "sshproxy", 
+      "static", 
+      "0f1c70d27e26005a96d66ad54482877ae20f7737693c833e29dd72bd6ac24892"
+    ], 
+    "lib/charms/layer/basic.py": [
+      "layer:basic", 
+      "static", 
+      "32204327952d4ea4ef1063f45bdbe7be379a7a7b8220f3e5f2f5e11003b25654"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/lib/charms/layer/__init__.py": [
+      "sshproxy", 
+      "static", 
+      "4ffd74384bd81d737572acf2d14fe55431eab8f49d6212d9aabedf24e1d992b2"
+    ], 
+    "trusty/sshproxy/icon.svg": [
+      "sshproxy", 
+      "static", 
+      "085f367baa9c4ec724561b6e0d5d167c14c4295d6311b719a57729a17ac025c7"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/tox.ini": [
+      "sshproxy", 
+      "static", 
+      "00b57a776ac313e92a52daa05d1fdb6056c21b3105b643d32610fd937664321b"
+    ], 
+    "deps/layer/layer-basic/hooks/upgrade-charm": [
+      "sshproxy", 
+      "static", 
+      "8b9c153a61cc78067af8d016a8fa1c764caad3a40c82bb0b5121fc4c4c6a04f1"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/wheelhouse.txt": [
+      "sshproxy", 
+      "static", 
+      "2f19b10e72d7299f4fc53c33caa0ad425ebcef59231238b49bc45b10ab49ae16"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/hooks/install": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/config.yaml": [
+      "sshproxy", 
+      "static", 
+      "2b2d549d971fea775f23b33e37aaf3a84726de4ffd9a7427748b268d80ca1dcd"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/reactive/sshproxy.py": [
+      "sshproxy", 
+      "static", 
+      "3c1ee9470d504defdfa0629aa437c1bea01769ec69ed222e0e62ae1fa3e05b77"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/wheelhouse/PyYAML-3.12.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "592766c6303207a20efc445587778322d7f73b161bd994f227adaa341ba212ab"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/hooks/start": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/hooks/leader-settings-changed": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/Makefile": [
+      "sshproxy", 
+      "static", 
+      "b7ab3a34e5faf79b96a8632039a0ad0aa87f2a9b5f0ba604e007cafb22190301"
+    ], 
+    "deps/layer/layer-basic/reactive/__init__.py": [
+      "sshproxy", 
+      "static", 
+      "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    ], 
+    "trusty/sshproxy/wheelhouse/pyaml-16.9.0.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "f8d394144d3bc5360cd48f54bfaa2d100a47040216d6f8703c17bd4b235e9bb3"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/hooks/leader-settings-changed": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/hooks/update-status": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/hooks/start": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "deps/layer/layer-basic/hooks/start": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "wheelhouse/charms.reactive-0.4.5.tar.gz": [
+      "layer:basic", 
+      "dynamic", 
+      "b2a475aff349a1c6532de0f9b4df5ee456b97a1e1755695afd8747dbc51bb710"
+    ], 
+    "trusty/sshproxy/deps/layer/layer-basic/hooks/hook.template": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "deps/layer/layer-basic/layer.yaml": [
+      "sshproxy", 
+      "static", 
+      "fbd3e3a22f3b8b1e7656e12f5db0ebf69c145b8e8b59c125e6faf043cba50b9b"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/trusty/sshproxy/README.md": [
+      "sshproxy", 
+      "static", 
+      "83d8c3dbf1dd3be70ba9774a16780d130ebdcfc722d89d86ed596e7feac70c9f"
+    ], 
+    "layer.yaml": [
+      "sshproxy", 
+      "dynamic", 
+      "6f8c78ce7424ab4548d8d2fa792321c174aa527866f6145e694e5535b4a2bf62"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/tox.ini": [
+      "sshproxy", 
+      "static", 
+      "00b57a776ac313e92a52daa05d1fdb6056c21b3105b643d32610fd937664321b"
+    ], 
+    "trusty/sshproxy/hooks/stop": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/wheelhouse/PyYAML-3.12.tar.gz": [
+      "sshproxy", 
+      "static", 
+      "592766c6303207a20efc445587778322d7f73b161bd994f227adaa341ba212ab"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/lib/charms/layer/__init__.py": [
+      "sshproxy", 
+      "static", 
+      "4ffd74384bd81d737572acf2d14fe55431eab8f49d6212d9aabedf24e1d992b2"
+    ], 
+    "trusty/sshproxy/trusty/sshproxy/deps/layer/layer-basic/hooks/hook.template": [
+      "sshproxy", 
+      "static", 
+      "3a854a5fd180c5bacbb80b501d968a8d8bdc1468361e7123ea4022a1e0363c9a"
+    ], 
+    "trusty/sshproxy/tests/00-setup": [
+      "sshproxy", 
+      "static", 
+      "111c079b81d260bbcd716dcf41672372a4cf4aaa14154b6c3055deeedae37a06"
+    ]
+  }
+}

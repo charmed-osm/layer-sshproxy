@@ -1,0 +1,10 @@
+"name": "sshproxy"
+"summary": "<Fill in summary here>"
+"maintainer": "Adam Israel <Adam.Israel@ronin>"
+"description": |
+  <Multi-line description here>
+"tags":
+  # Replace "misc" with one or more whitelisted tags from this list:
+  # https://jujucharms.com/docs/stable/authors-charm-metadata
+  - "misc"
+"subordinate": !!bool "false"
