@@ -52,4 +52,4 @@ def ssh(cmd, host, user, password=None):
         output = stderr.read().strip()
         raise CalledProcessError(returncode=retcode, cmd=cmd,
                                  output=output)
-    return (''.join(stdout), ''.join(stderr))
+    return (stdout.decode('utf-8').strip(), stderr.decode('utf-8').strip())
