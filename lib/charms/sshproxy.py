@@ -36,9 +36,7 @@ def _run(cmd, env=None):
 
 
 def ssh(cmd, host, user, password=None):
-    ''' Suddenly this project needs to SSH to something. So we replicate what
-        _run was doing with subprocess using the Paramiko library. This is
-        temporary until this charm /is/ the VPE Router '''
+    """ Run an arbitrary command over SSH. """
 
     cmds = ' '.join(cmd)
     client = paramiko.SSHClient()
