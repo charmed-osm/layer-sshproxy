@@ -14,9 +14,22 @@ import subprocess
 
 
 @when('config.changed')
-def config_changed():
-    # cfg = config()
-    if 1:
+def ssh_configured():
+    """ Checks to see if the charm is configured with SSH credentials. If so,
+    set a state flag that can be used to execute ssh-only actions.
+
+    For example:
+
+    @when('sshproxy.configured')
+    def run_remote_command(cmd):
+        ...
+
+    @when_not('sshproxy.configured')
+    def run_local_command(cmd):
+        ...
+    """
+    cfg = config()
+    if all(k in cfg for k in ['ssh-hostname', 'ssh-username', 'ssh-password']):
         set_state('sshproxy.configured')
     else:
         remove_state('sshproxy.configured')
@@ -24,6 +37,10 @@ def config_changed():
 
 @when('actions.run')
 def run_command():
+    """
+    Run an arbitrary command, either locally or over SSH with the configured
+    credentials.
+    """
     try:
         cmd = action_get('command')
         output, err = charms.sshproxy._run(cmd)
