@@ -1,7 +1,7 @@
 # Overview
 
 This is a [Juju] layer intended to ease the development of charms that need
-to execute commands over SSH.
+to execute commands over SSH, such as proxy charms.
 
 # What is a proxy charm?
 
