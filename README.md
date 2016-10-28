@@ -3,8 +3,6 @@
 This is a [Juju] layer intended to ease the development of charms that need
 to execute commands over SSH.
 
-This layer is intended to ease the development of so-called "proxy" charms and offer a path to creating full-featured charms.
-
 # What is a proxy charm?
 
 A proxy charm is a limited type of charm that does not interact with software running on the same host, such as controlling and configuring a remote device (a static VM image, a router/switch, etc.). It cannot take advantage of some of Juju's key features, such as [scaling], [relations], and [leadership].
