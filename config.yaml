@@ -6,8 +6,8 @@ options:
   ssh-username:
     type: string
     default: ""
-    description: "A short description of the configuration option"
+    description: "The username to login as."
   ssh-password:
     type: string
     default: ""
-    description: "A short description of the configuration option"
+    description: "The password used to authenticate."

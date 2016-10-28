@@ -64,7 +64,7 @@ timing:
 ```
 ## Known Limitations and Issues
 
-None yet.
+- Login is only allowed via password.
 
 # Configuration and Usage
 
