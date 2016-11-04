@@ -1,8 +1,9 @@
 name: sshproxy
-summary: <Fill in summary here>
-maintainer: Adam Israel <Adam.Israel@ronin>
+summary: Layer to run commands on a remote host over ssh
+maintainer: Adam Israel <adam.israel@canonical.com>
 description: |
-  <Multi-line description here>
+  This layer is intended to provide common ssh functionality, such as
+  running a command on a remote host.
 tags:
   # Replace "misc" with one or more whitelisted tags from this list:
   # https://jujucharms.com/docs/stable/authors-charm-metadata

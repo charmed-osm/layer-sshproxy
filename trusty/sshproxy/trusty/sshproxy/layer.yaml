@@ -1,9 +1,0 @@
-"options":
-  "layer-basic":
-    "use_venv": !!bool "false"
-    "packages": []
-    "include_system_packages": !!bool "false"
-  "sshproxy": {}
-"includes":
-- "layer:basic"
-"is": "sshproxy"
