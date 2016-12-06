@@ -4,6 +4,9 @@ maintainer: Adam Israel <adam.israel@canonical.com>
 description: |
   This layer is intended to provide common ssh functionality, such as
   running a command on a remote host.
+series:
+ - trusty
+ - xenial
 tags:
   # Replace "misc" with one or more whitelisted tags from this list:
   # https://jujucharms.com/docs/stable/authors-charm-metadata
