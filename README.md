@@ -62,7 +62,10 @@ timing:
 ```
 ## Known Limitations and Issues
 
-- Login is only allowed via password.
+### Security issues
+
+- Password and key-based authentications are supported, with the caveat that
+both (password and private key) are stored plaintext within the Juju controller.
 
 # Configuration and Usage
 
@@ -70,12 +73,18 @@ This layer adds the following configuration options:
 - ssh-hostname
 - ssh-username
 - ssh-password
+- ssh-private-key
 
 Once  [configure] those values at any time. Once they are set, the `sshproxy.configured` state flag will be toggled:
 
 ```
-juju deploy mycharm ssh-hostname=10.10.10.10 ssh-username=ubuntu ssh-password=
+juju deploy mycharm ssh-hostname=10.10.10.10 ssh-username=ubuntu ssh-password=yourpassword
 ```
+or
+```
+juju deploy mycharm ssh-hostname=10.10.10.10 ssh-username=ubuntu ssh-private-key="cat `~/.ssh/id_rsa`"
+```
+
 
 # Contact Information
 Homepage: https://github.com/AdamIsrael/layer-sshproxy

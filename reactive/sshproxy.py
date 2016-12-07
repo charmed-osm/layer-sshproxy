@@ -29,7 +29,8 @@ def ssh_configured():
         ...
     """
     cfg = config()
-    if all(k in cfg for k in ['ssh-hostname', 'ssh-username', 'ssh-password']):
+    if all(k in cfg for k in ['ssh-hostname', 'ssh-username',
+                              'ssh-password', 'ssh-private-key']):
         set_state('sshproxy.configured')
     else:
         remove_state('sshproxy.configured')

@@ -1,7 +1,9 @@
 from charmhelpers.core.hookenv import (
     config,
 )
+import io
 import paramiko
+
 from subprocess import (
     Popen,
     CalledProcessError,
@@ -14,13 +16,15 @@ def _run(cmd, env=None):
     if isinstance(cmd, str):
         cmd = cmd.split() if ' ' in cmd else [cmd]
     cfg = config()
-    if all(k in cfg for k in ['ssh-hostname', 'ssh-username', 'ssh-password']):
+    if all(k in cfg for k in ['ssh-hostname', 'ssh-username',
+                              'ssh-password', 'ssh-private-key']):
         host = cfg['ssh-hostname']
         user = cfg['ssh-username']
         passwd = cfg['ssh-password']
+        key = cfg['ssh-private-key']
 
-        if host and user and passwd:
-            return ssh(cmd, host, user, passwd)
+        if host and user and (passwd or key):
+            return ssh(cmd, host, user, passwd, key)
 
     p = Popen(cmd,
               env=env,
@@ -35,13 +39,19 @@ def _run(cmd, env=None):
     return (stdout.decode('utf-8').strip(), stderr.decode('utf-8').strip())
 
 
-def ssh(cmd, host, user, password=None):
+def ssh(cmd, host, user, password=None, key=None):
     """ Run an arbitrary command over SSH. """
 
     cmds = ' '.join(cmd)
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-    client.connect(host, port=22, username=user, password=password)
+
+    pkey = None
+    if key:
+        f = io.StringIO(key)
+        pkey = paramiko.RSAKey.from_private_key(f)
+
+    client.connect(host, port=22, username=user, password=password, pkey=pkey)
 
     stdin, stdout, stderr = client.exec_command(cmds)
     retcode = stdout.channel.recv_exit_status()

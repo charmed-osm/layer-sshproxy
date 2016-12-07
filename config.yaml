@@ -11,3 +11,7 @@ options:
     type: string
     default: ""
     description: "The password used to authenticate."
+  ssh-private-key:
+      type: string
+      default: ""
+      description: "The private ssh key to be used to authenticate."
