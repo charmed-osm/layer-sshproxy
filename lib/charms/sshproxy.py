@@ -53,7 +53,7 @@ def ssh(cmd, host, user, password=None, key=None):
 
     client.connect(host, port=22, username=user, password=password, pkey=pkey)
 
-    stdin, stdout, stderr = client.exec_command(cmds)
+    stdin, stdout, stderr = client.exec_command(cmds, get_pty=True)
     retcode = stdout.channel.recv_exit_status()
     client.close()  # @TODO re-use connections
     if retcode > 0:
