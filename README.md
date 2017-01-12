@@ -82,7 +82,7 @@ juju deploy mycharm ssh-hostname=10.10.10.10 ssh-username=ubuntu ssh-password=yo
 ```
 or
 ```
-juju deploy mycharm ssh-hostname=10.10.10.10 ssh-username=ubuntu ssh-private-key="cat `~/.ssh/id_rsa`"
+juju deploy mycharm ssh-hostname=10.10.10.10 ssh-username=ubuntu ssh-private-key="`cat ~/.ssh/id_rsa`"
 ```
 
 
