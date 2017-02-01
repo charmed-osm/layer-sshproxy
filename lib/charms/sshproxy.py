@@ -14,7 +14,8 @@ from subprocess import (
 def _run(cmd, env=None):
     """ Run a command, either on the local machine or remotely via SSH. """
     if isinstance(cmd, str):
-        cmd = cmd.split() if ' ' in cmd else [cmd]
+        cmd = cmd.split(' ') if ' ' in cmd else [cmd]
+
     cfg = config()
     if all(k in cfg for k in ['ssh-hostname', 'ssh-username',
                               'ssh-password', 'ssh-private-key']):
@@ -28,6 +29,7 @@ def _run(cmd, env=None):
 
     p = Popen(cmd,
               env=env,
+              shell=True,
               stdout=PIPE,
               stderr=PIPE)
     stdout, stderr = p.communicate()
@@ -51,7 +53,27 @@ def ssh(cmd, host, user, password=None, key=None):
         f = io.StringIO(key)
         pkey = paramiko.RSAKey.from_private_key(f)
 
-    client.connect(host, port=22, username=user, password=password, pkey=pkey)
+    ###########################################################################
+    # There is a bug in some versions of OpenSSH 4.3 (CentOS/RHEL 5) where    #
+    # the server may not send the SSH_MSG_USERAUTH_BANNER message except when #
+    # responding to an auth_none request. For example, paramiko will attempt  #
+    # to use password authentication when a password is set, but the server   #
+    # could deny that, instead requesting keyboard-interactive. The hack to   #
+    # workaround this is to attempt a reconnect, which will receive the right #
+    # banner, and authentication can proceed. See the following for more info #
+    # https://github.com/paramiko/paramiko/issues/432                         #
+    # https://github.com/paramiko/paramiko/pull/438                           #
+    ###########################################################################
+
+    try:
+        client.connect(host, port=22, username=user, password=password, pkey=pkey)
+    except paramiko.ssh_exception.SSHException as e:
+        if 'Error reading SSH protocol banner' == str(e):
+            # Once more, with feeling
+            client.connect(host, port=22, username=user, password=password, pkey=pkey)
+            pass
+        else:
+            raise paramiko.ssh_exception.SSHException(e)
 
     stdin, stdout, stderr = client.exec_command(cmds, get_pty=True)
     retcode = stdout.channel.recv_exit_status()
