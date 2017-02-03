@@ -41,10 +41,9 @@ def _run(cmd, env=None):
     return (stdout.decode('utf-8').strip(), stderr.decode('utf-8').strip())
 
 
-def ssh(cmd, host, user, password=None, key=None):
-    """ Run an arbitrary command over SSH. """
+def get_ssh_client(host, user, password=None, key=None):
+    """Return a connected Paramiko ssh object"""
 
-    cmds = ' '.join(cmd)
     client = paramiko.SSHClient()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
 
@@ -66,15 +65,35 @@ def ssh(cmd, host, user, password=None, key=None):
     ###########################################################################
 
     try:
-        client.connect(host, port=22, username=user, password=password, pkey=pkey)
+        client.connect(host, port=22, username=user,
+                       password=password, pkey=pkey)
     except paramiko.ssh_exception.SSHException as e:
         if 'Error reading SSH protocol banner' == str(e):
             # Once more, with feeling
-            client.connect(host, port=22, username=user, password=password, pkey=pkey)
+            client.connect(host, port=22, username=user,
+                           password=password, pkey=pkey)
             pass
         else:
             raise paramiko.ssh_exception.SSHException(e)
 
+    return client
+
+
+def sftp(local_file, remote_file, host, user, password=None, key=None):
+    """Copy a local file to a remote host"""
+    client = get_ssh_client(host, user, password, key)
+
+    # Create an sftp connection from the underlying transport
+    sftp = paramiko.SFTPClient.from_transport(client.get_transport())
+    sftp.put(local_file, remote_file)
+    client.close()
+
+
+def ssh(cmd, host, user, password=None, key=None):
+    """ Run an arbitrary command over SSH. """
+    client = get_ssh_client(host, user, password, key)
+
+    cmds = ' '.join(cmd)
     stdin, stdout, stderr = client.exec_command(cmds, get_pty=True)
     retcode = stdout.channel.recv_exit_status()
     client.close()  # @TODO re-use connections
