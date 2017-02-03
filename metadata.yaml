@@ -1,5 +1,5 @@
 name: sshproxy
-summary: Layer to run commands on a remote host over ssh
+summary: Layer to copy files to or run commands on a remote host over ssh
 maintainer: Adam Israel <adam.israel@canonical.com>
 description: |
   This layer is intended to provide common ssh functionality, such as
