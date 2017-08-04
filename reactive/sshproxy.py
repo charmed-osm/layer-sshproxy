@@ -134,7 +134,7 @@ def verify_ssh_credentials():
     """
     try:
         cfg = config()
-        if all(k in cfg for k in ['ssh-hostname', 'ssh-username']):
+        if len(cfg['ssh-hostname']) and len(cfg['ssh-username']):
             cmd = 'hostname'
             output, err = charms.sshproxy._run(cmd)
 
