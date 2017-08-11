@@ -18,8 +18,11 @@
 
 from charmhelpers.core.hookenv import (
     config,
+    log,
 )
+import copy
 import io
+import json
 import paramiko
 import os
 
@@ -28,6 +31,14 @@ from subprocess import (
     CalledProcessError,
     PIPE,
 )
+
+
+def charm_dir():
+    """Return the root directory of the current charm."""
+    d = os.environ.get('JUJU_CHARM_DIR')
+    if d is not None:
+        return d
+    return os.environ.get('CHARM_DIR')
 
 
 def run_local(cmd, env=None):
@@ -53,7 +64,26 @@ def _run(cmd, env=None):
     """Run a command, either on the local machine or remotely via SSH."""
     if isinstance(cmd, str):
         cmd = cmd.split(' ') if ' ' in cmd else [cmd]
-    cfg = config()
+
+    cfg = None
+    try:
+        cfg = config()
+    except CalledProcessError as e:
+        # We may be running in a restricted context, such as the
+        # collect-metrics hook, so attempt to read the persistent config
+        # TODO: Make this a patch to charmhelpers.hookenv.config()
+        # cfg = Config()
+        CONFIG = os.path.join(charm_dir(), '.juju-persistent-config')
+        cfg = {}
+        with open(CONFIG) as f:
+            data = json.load(f)
+            log(data)
+            for k, v in copy.deepcopy(data).items():
+                if k not in cfg:
+                    log("{}={}".format(k, v))
+                    cfg[k] = v
+    finally:
+        pass
 
     if all(k in cfg for k in ['ssh-hostname', 'ssh-username',
                               'ssh-password', 'ssh-private-key']):
