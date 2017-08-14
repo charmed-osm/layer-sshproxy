@@ -1,13 +1,25 @@
+
 # Overview
 
-This is a [Juju] layer intended to ease the development of charms that need
-to execute commands over SSH, such as proxy charms.
+This [Juju] layer is intended to ease the development of charms that need
+to execute commands over SSH, such as [proxy charms].
 
-# What is a proxy charm?
+# Security
 
-A proxy charm is a limited type of charm that does not interact with software running on the same host, such as controlling and configuring a remote device (a static VM image, a router/switch, etc.). It cannot take advantage of some of Juju's key features, such as [scaling], [relations], and [leadership].
+The initial version of this charm exposed configuration values for `ssh-password` and `ssh-private-key`; this approach was deeply flawed. As of TK, these fields are deprecated and only there for backwards compatibility.
 
-Proxy charms are primarily a stop-gap, intended to prototype quickly, with the end goal being to develop it into a full-featured charm, which installs and executes code on the same machine as the charm is running.
+On install, the layer will generate a new keypair, and expose the public key via the `ssh-public-key` configuration element.
+
+1. Deploy charm that includes sshproxy layer
+2. Set `ssh-hostname` and `ssh-username`
+3. Call the `ssh-public-key` action and add it's `pubkey` output to the user and machine specified by `ssh-username` and `ssh-hostname`.
+4. Invoke `verify-ssh-credentials` action to verify the unit can connect to the `ssh-hostname` and authenticate.
+
+# Actions
+- generate-ssh-key
+- verify-ssh-credentials
+- get-ssh-public-key
+- run
 
 # Integration
 
@@ -64,8 +76,11 @@ timing:
 
 ### Security issues
 
-- Password and key-based authentications are supported, with the caveat that
-both (password and private key) are stored plaintext within the Juju controller.
+- Password-based authentication is supported, with the caveat that
+it is stored plaintext within the Juju controller.
+- The previously-supported use of `ssh-private-key` is now DEPRECATED.
+
+It's recommended that you implement the public key-based workflow documented above.
 
 # Configuration and Usage
 
@@ -73,16 +88,24 @@ This layer adds the following configuration options:
 - ssh-hostname
 - ssh-username
 - ssh-password
-- ssh-private-key
 
 Once  [configure] those values at any time. Once they are set, the `sshproxy.configured` state flag will be toggled:
 
 ```
-juju deploy mycharm ssh-hostname=10.10.10.10 ssh-username=ubuntu ssh-password=yourpassword
-```
-or
-```
-juju deploy mycharm ssh-hostname=10.10.10.10 ssh-username=ubuntu ssh-private-key="`cat ~/.ssh/id_rsa`"
+$ juju deploy mycharm ssh-hostname=10.10.10.10 ssh-username=ubuntu
+$ juju run-action mycharm/0 get-ssh-public-key
+Action queued with id: d2afaf3c-3c5a-4bc6-872b-fdb2ad4d6a45
+$ juju show-action-output d2afaf3c-3c5a-4bc6-872b-fdb2ad4d6a45
+results:
+  pubkey: |
+    ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDJaWMK+/wb23mPQ+5Rb0gtljpE3DkAoJQ9oU3TWppDqJGX
+    [...]
+    MV1DQGijCcWQ== user@myhost
+status: completed
+timing:
+  completed: 2017-08-03 15:39:21 +0000 UTC
+  enqueued: 2017-08-03 15:39:16 +0000 UTC
+  started: 2017-08-03 15:39:20 +0000 UTC
 ```
 
 
