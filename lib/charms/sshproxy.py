@@ -33,6 +33,38 @@ from subprocess import (
 )
 
 
+def verify_ssh_credentials():
+    """Verify the ssh credentials have been installed to the VNF.
+
+    Attempts to run a stock command - `hostname` on the remote host.
+    """
+    verified = False
+    status = ''
+    try:
+        cfg = config()
+        if len(cfg['ssh-hostname']) and len(cfg['ssh-username']):
+            cmd = 'hostname'
+            status, err = _run(cmd)
+
+            if len(err) == 0:
+                verified = True
+    except CalledProcessError as e:
+        status = 'Command failed: {} ({})'.format(
+            ' '.join(e.cmd),
+            str(e.output)
+        )
+    except paramiko.ssh_exception.AuthenticationException as e:
+        status = 'Authentication failed.'
+    except paramiko.ssh_exception.BadAuthenticationType as e:
+        status = '{}'.format(e.explanation)
+    except paramiko.ssh_exception.BadHostKeyException as e:
+        status = 'Host key mismatch: expected {} but got {}.'.format(
+            e.expected_key,
+            e.got_key,
+        )
+    return (verified, status)
+
+
 def charm_dir():
     """Return the root directory of the current charm."""
     d = os.environ.get('JUJU_CHARM_DIR')
