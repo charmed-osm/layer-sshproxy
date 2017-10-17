@@ -29,7 +29,6 @@ from charms.reactive import (
 )
 import charms.sshproxy
 import os
-import paramiko
 import subprocess
 
 
@@ -127,39 +126,21 @@ def action_get_ssh_public_key():
 
 
 @when('actions.verify-ssh-credentials')
-def verify_ssh_credentials():
+def action_verify_ssh_credentials():
     """Verify the ssh credentials have been installed to the VNF.
 
     Attempts to run a stock command - `hostname` on the remote host.
     """
     try:
-        cfg = config()
-        if len(cfg['ssh-hostname']) and len(cfg['ssh-username']):
-            cmd = 'hostname'
-            output, err = charms.sshproxy._run(cmd)
-
-            if len(err):
-                action_fail("Command '{}' returned error code {}".format(
-                    cmd,
-                    err,
-                ))
-            else:
-                action_set({'output': output})
-        else:
-            action_fail('Invalid SSH credentials.')
-    except subprocess.CalledProcessError as e:
-        action_fail('Command failed: %s (%s)' %
-                    (' '.join(e.cmd), str(e.output)))
-    except paramiko.ssh_exception.AuthenticationException as e:
-        action_fail('Authentication failed.')
-        pass
-    except paramiko.ssh_exception.BadAuthenticationType as e:
-        action_fail('{}'.format(e.explanation))
-    except paramiko.ssh_exception.BadHostKeyException as e:
-        action_fail('Host key mismatch: expected {} but got {}.'.format(
-            e.expected_key,
-            e.got_key,
-        ))
+        (verified, output) = charms.sshproxy.verify_ssh_credentials()
+        action_set({
+            'output': output,
+            'verified': verified,
+        })
+        if not validated:
+            action_fail("Verification failed: {}".format(
+                output,
+            ))
     finally:
         remove_state('actions.verify-ssh-credentials')
 

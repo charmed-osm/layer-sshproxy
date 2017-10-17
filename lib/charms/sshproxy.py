@@ -18,8 +18,11 @@
 
 from charmhelpers.core.hookenv import (
     config,
+    log,
 )
+import copy
 import io
+import json
 import paramiko
 import os
 
@@ -28,6 +31,46 @@ from subprocess import (
     CalledProcessError,
     PIPE,
 )
+
+
+def verify_ssh_credentials():
+    """Verify the ssh credentials have been installed to the VNF.
+
+    Attempts to run a stock command - `hostname` on the remote host.
+    """
+    verified = False
+    status = ''
+    try:
+        cfg = config()
+        if len(cfg['ssh-hostname']) and len(cfg['ssh-username']):
+            cmd = 'hostname'
+            status, err = _run(cmd)
+
+            if len(err) == 0:
+                verified = True
+    except CalledProcessError as e:
+        status = 'Command failed: {} ({})'.format(
+            ' '.join(e.cmd),
+            str(e.output)
+        )
+    except paramiko.ssh_exception.AuthenticationException as e:
+        status = 'Authentication failed.'
+    except paramiko.ssh_exception.BadAuthenticationType as e:
+        status = '{}'.format(e.explanation)
+    except paramiko.ssh_exception.BadHostKeyException as e:
+        status = 'Host key mismatch: expected {} but got {}.'.format(
+            e.expected_key,
+            e.got_key,
+        )
+    return (verified, status)
+
+
+def charm_dir():
+    """Return the root directory of the current charm."""
+    d = os.environ.get('JUJU_CHARM_DIR')
+    if d is not None:
+        return d
+    return os.environ.get('CHARM_DIR')
 
 
 def run_local(cmd, env=None):
@@ -53,7 +96,26 @@ def _run(cmd, env=None):
     """Run a command, either on the local machine or remotely via SSH."""
     if isinstance(cmd, str):
         cmd = cmd.split(' ') if ' ' in cmd else [cmd]
-    cfg = config()
+
+    cfg = None
+    try:
+        cfg = config()
+    except CalledProcessError as e:
+        # We may be running in a restricted context, such as the
+        # collect-metrics hook, so attempt to read the persistent config
+        # TODO: Make this a patch to charmhelpers.hookenv.config()
+        # cfg = Config()
+        CONFIG = os.path.join(charm_dir(), '.juju-persistent-config')
+        cfg = {}
+        with open(CONFIG) as f:
+            data = json.load(f)
+            log(data)
+            for k, v in copy.deepcopy(data).items():
+                if k not in cfg:
+                    log("{}={}".format(k, v))
+                    cfg[k] = v
+    finally:
+        pass
 
     if all(k in cfg for k in ['ssh-hostname', 'ssh-username',
                               'ssh-password', 'ssh-private-key']):
