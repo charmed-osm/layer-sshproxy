@@ -33,6 +33,16 @@ from subprocess import (
 )
 
 
+def is_routable(target_ip):
+    """Determine if there is a route from this machine to the target."""
+    cmd = ["ip route show {} | wc -l".format(target_ip)]
+    status, err = run_local(cmd)
+    if int(status) > 0:
+        return True
+
+    return False
+
+
 def verify_ssh_credentials():
     """Verify the ssh credentials have been installed to the VNF.
 
@@ -43,11 +53,14 @@ def verify_ssh_credentials():
     try:
         cfg = config()
         if len(cfg['ssh-hostname']) and len(cfg['ssh-username']):
-            cmd = 'hostname'
-            status, err = _run(cmd)
+            if is_routable(cfg['ssh-hostname']):
+                cmd = 'hostname'
+                status, err = _run(cmd)
 
-            if len(err) == 0:
-                verified = True
+                if len(err) == 0:
+                    verified = True
+            else:
+                status = "No route to {}".format(cfg['ssh-hostname'])
     except CalledProcessError as e:
         status = 'Command failed: {} ({})'.format(
             ' '.join(e.cmd),
