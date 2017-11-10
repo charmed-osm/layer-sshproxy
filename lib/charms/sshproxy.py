@@ -25,6 +25,7 @@ import io
 import json
 import paramiko
 import os
+import socket
 
 from subprocess import (
     Popen,
@@ -53,7 +54,7 @@ def verify_ssh_credentials():
     status = ''
     try:
         cfg = config()
-        if len(get_host_ip()) and len(cfg['ssh-username']):
+        if len(cfg['ssh-hostname']) and len(cfg['ssh-username']):
             cmd = 'hostname'
             status, err = _run(cmd)
 
@@ -132,7 +133,7 @@ def _run(cmd, env=None):
 
     if all(k in cfg for k in ['ssh-hostname', 'ssh-username',
                               'ssh-password', 'ssh-private-key']):
-        host = get_host_ip()
+        host = cfg['ssh-hostname']
         user = cfg['ssh-username']
         passwd = cfg['ssh-password']
         key = cfg['ssh-private-key']  # DEPRECATED
