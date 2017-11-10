@@ -33,6 +33,17 @@ from subprocess import (
 )
 
 
+def get_host_ip():
+    """Get the IP address for the ssh host.
+
+    HACK: This function was added to work around an issue where the
+    ssh-hostname was passed in the format of a.b.c.d;a.b.c.d, where the first
+    is the floating ip, and the second the non-floating ip, for an Openstack
+    instance.
+    """
+    cfg = config()
+    return cfg['ssh-hostname'].split(';')[0]
+
 def verify_ssh_credentials():
     """Verify the ssh credentials have been installed to the VNF.
 
@@ -42,7 +53,7 @@ def verify_ssh_credentials():
     status = ''
     try:
         cfg = config()
-        if len(cfg['ssh-hostname']) and len(cfg['ssh-username']):
+        if len(get_host_ip()) and len(cfg['ssh-username']):
             cmd = 'hostname'
             status, err = _run(cmd)
 
@@ -121,7 +132,7 @@ def _run(cmd, env=None):
 
     if all(k in cfg for k in ['ssh-hostname', 'ssh-username',
                               'ssh-password', 'ssh-private-key']):
-        host = cfg['ssh-hostname']
+        host = get_host_ip()
         user = cfg['ssh-username']
         passwd = cfg['ssh-password']
         key = cfg['ssh-private-key']  # DEPRECATED
