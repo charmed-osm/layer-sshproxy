@@ -133,7 +133,7 @@ def _run(cmd, env=None):
 
     if all(k in cfg for k in ['ssh-hostname', 'ssh-username',
                               'ssh-password', 'ssh-private-key']):
-        host = cfg['ssh-hostname']
+        host = get_host_ip() 
         user = cfg['ssh-username']
         passwd = cfg['ssh-password']
         key = cfg['ssh-private-key']  # DEPRECATED
