@@ -20,7 +20,9 @@ from charmhelpers.core.hookenv import (
     action_get,
     action_set,
     config,
+    unitdata,
 )
+
 from charms.reactive import (
     remove_state,
     set_state,
@@ -50,9 +52,16 @@ def ssh_configured():
         ...
     """
     cfg = config()
-    if all(k in cfg for k in ['ssh-hostname', 'ssh-username',
-                              'ssh-password', 'ssh-private-key']):
+    ssh_keys = ['ssh-hostname', 'ssh-username',
+                'ssh-password', 'ssh-private-key']
+    if all(k in cfg for k in ssh_keys):
         set_state('sshproxy.configured')
+
+        # Store config in unitdata so it's accessible to collect-metrics
+        db = unitdata.kv()
+        for key in ssh_keys:
+            db.set(key, cfg[key])
+
     else:
         remove_state('sshproxy.configured')
 
