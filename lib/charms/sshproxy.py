@@ -16,10 +16,8 @@
 # under the License.
 ##
 
-from charmhelpers.core.hookenv import (
-    config,
-    log,
-)
+from charmhelpers.core import unitdata
+
 import copy
 import io
 import json
@@ -33,6 +31,11 @@ from subprocess import (
     PIPE,
 )
 
+# Use unitdata to retrieve configuration, to support running in a limited
+# context, such as the collect-metrics hook.
+db = unitdata.kv()
+cfg = db.getrange('config', True)
+
 
 def get_host_ip():
     """Get the IP address for the ssh host.
@@ -42,7 +45,6 @@ def get_host_ip():
     is the floating ip, and the second the non-floating ip, for an Openstack
     instance.
     """
-    cfg = config()
     return cfg['ssh-hostname'].split(';')[0]
 
 def verify_ssh_credentials():
@@ -53,7 +55,6 @@ def verify_ssh_credentials():
     verified = False
     status = ''
     try:
-        cfg = config()
         if len(cfg['ssh-hostname']) and len(cfg['ssh-username']):
             cmd = 'hostname'
             status, err = _run(cmd)
@@ -111,29 +112,29 @@ def _run(cmd, env=None):
     if isinstance(cmd, str):
         cmd = cmd.split(' ') if ' ' in cmd else [cmd]
 
-    cfg = None
-    try:
-        cfg = config()
-    except CalledProcessError as e:
-        # We may be running in a restricted context, such as the
-        # collect-metrics hook, so attempt to read the persistent config
-        # TODO: Make this a patch to charmhelpers.hookenv.config()
-        # cfg = Config()
-        CONFIG = os.path.join(charm_dir(), '.juju-persistent-config')
-        cfg = {}
-        with open(CONFIG) as f:
-            data = json.load(f)
-            log(data)
-            for k, v in copy.deepcopy(data).items():
-                if k not in cfg:
-                    log("{}={}".format(k, v))
-                    cfg[k] = v
-    finally:
-        pass
+    # cfg = None
+    # try:
+    #     cfg = config()
+    # except CalledProcessError as e:
+    #     # We may be running in a restricted context, such as the
+    #     # collect-metrics hook, so attempt to read the persistent config
+    #     # TODO: Make this a patch to charmhelpers.hookenv.config()
+    #     # cfg = Config()
+    #     CONFIG = os.path.join(charm_dir(), '.juju-persistent-config')
+    #     cfg = {}
+    #     with open(CONFIG) as f:
+    #         data = json.load(f)
+    #         log(data)
+    #         for k, v in copy.deepcopy(data).items():
+    #             if k not in cfg:
+    #                 log("{}={}".format(k, v))
+    #                 cfg[k] = v
+    # finally:
+    #     pass
 
     if all(k in cfg for k in ['ssh-hostname', 'ssh-username',
                               'ssh-password', 'ssh-private-key']):
-        host = get_host_ip() 
+        host = get_host_ip()
         user = cfg['ssh-username']
         passwd = cfg['ssh-password']
         key = cfg['ssh-private-key']  # DEPRECATED
