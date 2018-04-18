@@ -15,12 +15,12 @@
 # under the License.
 ##
 
+from charmhelpers.core import unitdata
 from charmhelpers.core.hookenv import (
     action_fail,
     action_get,
     action_set,
     config,
-    unitdata,
 )
 
 from charms.reactive import (
@@ -59,8 +59,9 @@ def ssh_configured():
 
         # Store config in unitdata so it's accessible to collect-metrics
         db = unitdata.kv()
-        for key in ssh_keys:
-            db.set(key, cfg[key])
+        db.set('config', cfg)
+        # for key in ssh_keys:
+        #     db.set(key, cfg[key])
 
     else:
         remove_state('sshproxy.configured')

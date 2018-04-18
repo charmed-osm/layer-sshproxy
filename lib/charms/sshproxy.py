@@ -18,12 +18,11 @@
 
 from charmhelpers.core import unitdata
 
-import copy
 import io
-import json
 import paramiko
 import os
 import socket
+import shlex
 
 from subprocess import (
     Popen,
@@ -34,7 +33,7 @@ from subprocess import (
 # Use unitdata to retrieve configuration, to support running in a limited
 # context, such as the collect-metrics hook.
 db = unitdata.kv()
-cfg = db.getrange('config', True)
+cfg = db.get('config')
 
 
 def get_host_ip():
@@ -91,7 +90,10 @@ def charm_dir():
 def run_local(cmd, env=None):
     """Run a command locally."""
     if isinstance(cmd, str):
-        cmd = cmd.split(' ') if ' ' in cmd else [cmd]
+        cmd = shlex.split(cmd) if ' ' in cmd else [cmd]
+
+    if type(cmd) is not list:
+        cmd = [cmd]
 
     p = Popen(cmd,
               env=env,
@@ -110,7 +112,10 @@ def run_local(cmd, env=None):
 def _run(cmd, env=None):
     """Run a command, either on the local machine or remotely via SSH."""
     if isinstance(cmd, str):
-        cmd = cmd.split(' ') if ' ' in cmd else [cmd]
+        cmd = shlex.split(cmd)
+
+    if type(cmd) is not list:
+        cmd = [cmd]
 
     # cfg = None
     # try:
