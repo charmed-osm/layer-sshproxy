@@ -21,6 +21,7 @@ from charmhelpers.core.hookenv import (
     action_get,
     action_set,
     config,
+    status_set,
 )
 
 from charms.reactive import (
@@ -54,17 +55,26 @@ def ssh_configured():
     cfg = config()
     ssh_keys = ['ssh-hostname', 'ssh-username',
                 'ssh-password', 'ssh-private-key']
-    if all(k in cfg for k in ssh_keys):
-        set_state('sshproxy.configured')
 
-        # Store config in unitdata so it's accessible to collect-metrics
+    if all(k in cfg for k in ssh_keys):
+
+        # Store config in unitdata so it's accessible to sshproxy
         db = unitdata.kv()
         db.set('config', cfg)
-        # for key in ssh_keys:
-        #     db.set(key, cfg[key])
 
+        # Explicitly flush the kv so it's immediately available
+        db.flush()
+
+        (verified, output) = charms.sshproxy.verify_ssh_credentials()
+        if verified:
+            set_state('sshproxy.configured')
+            status_set('active', 'Ready!')
+        else:
+            remove_state('sshproxy.configured')
+            status_set('blocked', "Verification failed: {}".format(output))
     else:
         remove_state('sshproxy.configured')
+        status_set('blocked', 'Invalid SSH credentials.')
 
 
 def generate_ssh_key():
@@ -147,7 +157,7 @@ def action_verify_ssh_credentials():
             'output': output,
             'verified': verified,
         })
-        if not validated:
+        if not verified:
             action_fail("Verification failed: {}".format(
                 output,
             ))

@@ -19,6 +19,7 @@
 from charmhelpers.core import unitdata
 
 import io
+import ipaddress
 import paramiko
 import os
 import socket
@@ -30,10 +31,15 @@ from subprocess import (
     PIPE,
 )
 
-# Use unitdata to retrieve configuration, to support running in a limited
-# context, such as the collect-metrics hook.
-db = unitdata.kv()
-cfg = db.get('config')
+
+def get_config():
+    """Get the current charm configuration.
+
+    Get the "live" kv store every time we need to access the charm config, in
+    case it has recently been changed by a config-changed event.
+    """
+    db = unitdata.kv()
+    return db.get('config')
 
 
 def get_host_ip():
@@ -44,7 +50,22 @@ def get_host_ip():
     is the floating ip, and the second the non-floating ip, for an Openstack
     instance.
     """
+    cfg = get_config()
     return cfg['ssh-hostname'].split(';')[0]
+
+
+def is_valid_hostname(hostname):
+    """Validate the ssh-hostname."""
+    if hostname == "0.0.0.0":
+        return False
+
+    try:
+        ipaddress.ip_address(hostname)
+    except ValueError:
+        return False
+
+    return True
+
 
 def verify_ssh_credentials():
     """Verify the ssh credentials have been installed to the VNF.
@@ -53,20 +74,26 @@ def verify_ssh_credentials():
     """
     verified = False
     status = ''
-    try:
-        if len(cfg['ssh-hostname']) and len(cfg['ssh-username']):
-            cmd = 'hostname'
-            status, err = _run(cmd)
+    cfg = get_config()
 
-            if len(err) == 0:
-                verified = True
+    try:
+        host = cfg['ssh-hostname']
+        if is_valid_hostname(host):
+            if len(cfg['ssh-hostname']) and len(cfg['ssh-username']):
+                cmd = 'hostname'
+                status, err = _run(cmd)
+
+                if len(err) == 0:
+                    verified = True
+        else:
+            status = "Invalid IP address."
     except CalledProcessError as e:
         status = 'Command failed: {} ({})'.format(
             ' '.join(e.cmd),
             str(e.output)
         )
     except paramiko.ssh_exception.AuthenticationException as e:
-        status = 'Authentication failed.'
+        status = '{}.'.format(e)
     except paramiko.ssh_exception.BadAuthenticationType as e:
         status = '{}'.format(e.explanation)
     except paramiko.ssh_exception.BadHostKeyException as e:
@@ -74,8 +101,11 @@ def verify_ssh_credentials():
             e.expected_key,
             e.got_key,
         )
-    except socket.timeout as error:
+    except (TimeoutError, socket.timeout):
         status = "Timeout attempting to reach {}".format(cfg['ssh-hostname'])
+    except Exception as error:
+        status = 'Unhandled exception: {}'.format(error)
+
     return (verified, status)
 
 
@@ -117,35 +147,18 @@ def _run(cmd, env=None):
     if type(cmd) is not list:
         cmd = [cmd]
 
-    # cfg = None
-    # try:
-    #     cfg = config()
-    # except CalledProcessError as e:
-    #     # We may be running in a restricted context, such as the
-    #     # collect-metrics hook, so attempt to read the persistent config
-    #     # TODO: Make this a patch to charmhelpers.hookenv.config()
-    #     # cfg = Config()
-    #     CONFIG = os.path.join(charm_dir(), '.juju-persistent-config')
-    #     cfg = {}
-    #     with open(CONFIG) as f:
-    #         data = json.load(f)
-    #         log(data)
-    #         for k, v in copy.deepcopy(data).items():
-    #             if k not in cfg:
-    #                 log("{}={}".format(k, v))
-    #                 cfg[k] = v
-    # finally:
-    #     pass
+    cfg = get_config()
 
-    if all(k in cfg for k in ['ssh-hostname', 'ssh-username',
-                              'ssh-password', 'ssh-private-key']):
-        host = get_host_ip()
-        user = cfg['ssh-username']
-        passwd = cfg['ssh-password']
-        key = cfg['ssh-private-key']  # DEPRECATED
+    if cfg:
+        if all(k in cfg for k in ['ssh-hostname', 'ssh-username',
+                                  'ssh-password', 'ssh-private-key']):
+            host = get_host_ip()
+            user = cfg['ssh-username']
+            passwd = cfg['ssh-password']
+            key = cfg['ssh-private-key']  # DEPRECATED
 
-        if host and user:
-            return ssh(cmd, host, user, passwd, key)
+            if host and user:
+                return ssh(cmd, host, user, passwd, key)
 
     return run_local(cmd, env)
 
