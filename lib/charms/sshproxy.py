@@ -77,7 +77,7 @@ def verify_ssh_credentials():
     cfg = get_config()
 
     try:
-        host = cfg['ssh-hostname']
+        host = get_host_ip()
         if is_valid_hostname(host):
             if len(cfg['ssh-hostname']) and len(cfg['ssh-username']):
                 cmd = 'hostname'
