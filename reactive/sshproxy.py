@@ -25,8 +25,8 @@ from charmhelpers.core.hookenv import (
 )
 
 from charms.reactive import (
-    remove_state,
-    set_state,
+    clear_flag,
+    set_flag,
     when,
     when_not,
 )
@@ -67,13 +67,13 @@ def ssh_configured():
 
         (verified, output) = charms.sshproxy.verify_ssh_credentials()
         if verified:
-            set_state('sshproxy.configured')
+            set_flag('sshproxy.configured')
             status_set('active', 'Ready!')
         else:
-            remove_state('sshproxy.configured')
+            clear_flag('sshproxy.configured')
             status_set('blocked', "Verification failed: {}".format(output))
     else:
-        remove_state('sshproxy.configured')
+        clear_flag('sshproxy.configured')
         status_set('blocked', 'Invalid SSH credentials.')
 
 
@@ -119,7 +119,7 @@ def action_generate_ssh_key():
         action_fail('Command failed: %s (%s)' %
                     (' '.join(e.cmd), str(e.output)))
     finally:
-        remove_state('actions.generate-ssh-key')
+        clear_flag('actions.generate-ssh-key')
 
 
 def get_ssh_public_key():
@@ -142,7 +142,7 @@ def action_get_ssh_public_key():
         action_fail('Command failed: %s (%s)' %
                     (' '.join(e.cmd), str(e.output)))
     finally:
-        remove_state('actions.get-ssh-public-key')
+        clear_flag('actions.get-ssh-public-key')
 
 
 @when('actions.verify-ssh-credentials')
@@ -162,7 +162,7 @@ def action_verify_ssh_credentials():
                 output,
             ))
     finally:
-        remove_state('actions.verify-ssh-credentials')
+        clear_flag('actions.verify-ssh-credentials')
 
 
 @when('actions.run')
@@ -183,11 +183,11 @@ def run_command():
         action_fail('Command failed: %s (%s)' %
                     (' '.join(e.cmd), str(e.output)))
     finally:
-        remove_state('actions.run')
+        clear_flag('actions.run')
 
 
 @when_not('sshproxy.installed')
 def install_vnf_ubuntu_proxy():
     """Install and Configure SSH Proxy."""
     generate_ssh_key()
-    set_state('sshproxy.installed')
+    set_flag('sshproxy.installed')
