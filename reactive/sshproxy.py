@@ -24,6 +24,8 @@ from charmhelpers.core.hookenv import (
     status_set,
 )
 
+from charms.reactive.flags import register_trigger
+
 from charms.reactive import (
     clear_flag,
     set_flag,
@@ -34,8 +36,13 @@ import charms.sshproxy
 import os
 import subprocess
 
+# Register a trigger so that we can respond to config.changed, even if
+# it's being cleared by another handler
+register_trigger(when='config.changed',
+                 set_flag='sshproxy.reconfigure')
 
-@when('config.changed')
+
+@when('sshproxy.reconfigure')
 def ssh_configured():
     """Check if charm is properly configured.
 
