@@ -140,7 +140,12 @@ def run_local(cmd, env=None):
 
 
 def _run(cmd, env=None):
-    """Run a command, either on the local machine or remotely via SSH."""
+    """Run a command remotely via SSH.
+
+    Note: The previous behavior was to run the command locally if SSH wasn't
+    configured, but that can lead to cases where execution succeeds when you'd
+    expect it not to.
+    """
     if isinstance(cmd, str):
         cmd = shlex.split(cmd)
 
@@ -160,7 +165,7 @@ def _run(cmd, env=None):
             if host and user:
                 return ssh(cmd, host, user, passwd, key)
 
-    return run_local(cmd, env)
+    raise Exception("Invalid SSH credentials.")
 
 
 def get_ssh_client(host, user, password=None, key=None):
