@@ -21,7 +21,9 @@ from charmhelpers.core.hookenv import (
     action_get,
     action_set,
     config,
+    log,
     status_set,
+    DEBUG,
 )
 
 from charms.reactive.flags import register_trigger
@@ -31,6 +33,7 @@ from charms.reactive import (
     set_flag,
     when,
     when_not,
+    when_any,
 )
 import charms.sshproxy
 import os
@@ -42,7 +45,7 @@ register_trigger(when='config.changed',
                  set_flag='sshproxy.reconfigure')
 
 
-@when('sshproxy.reconfigure')
+@when_any('config.changed', 'sshproxy.reconfigure')
 def ssh_configured():
     """Check if charm is properly configured.
 
@@ -59,6 +62,7 @@ def ssh_configured():
     def run_local_command(cmd):
         ...
     """
+    log("Checking sshproxy configuration", DEBUG)
     cfg = config()
     ssh_keys = ['ssh-hostname', 'ssh-username',
                 'ssh-password', 'ssh-private-key']
@@ -72,14 +76,17 @@ def ssh_configured():
         # Explicitly flush the kv so it's immediately available
         db.flush()
 
+        log("Verifying ssh credentials...", DEBUG)
         (verified, output) = charms.sshproxy.verify_ssh_credentials()
         if verified:
+            log("SSH credentials verified.", DEBUG)
             set_flag('sshproxy.configured')
             status_set('active', 'Ready!')
         else:
             clear_flag('sshproxy.configured')
             status_set('blocked', "Verification failed: {}".format(output))
     else:
+        log("No ssh credentials configured", DEBUG)
         clear_flag('sshproxy.configured')
         status_set('blocked', 'Invalid SSH credentials.')
 
@@ -196,5 +203,7 @@ def run_command():
 @when_not('sshproxy.installed')
 def install_vnf_ubuntu_proxy():
     """Install and Configure SSH Proxy."""
+
+    log("Generating SSH key...", DEBUG)
     generate_ssh_key()
     set_flag('sshproxy.installed')
