@@ -25,11 +25,13 @@ import os
 import socket
 import shlex
 
+
 from subprocess import (
     Popen,
     CalledProcessError,
     PIPE,
 )
+import time
 
 
 def get_config():
@@ -82,7 +84,6 @@ def verify_ssh_credentials():
             if len(cfg['ssh-hostname']) and len(cfg['ssh-username']):
                 cmd = 'hostname'
                 status, err = _run(cmd)
-
                 if len(err) == 0:
                     verified = True
         else:
@@ -101,7 +102,7 @@ def verify_ssh_credentials():
             e.expected_key,
             e.got_key,
         )
-    except (TimeoutError, socket.timeout):
+    except socket.timeout:
         status = "Timeout attempting to reach {}".format(cfg['ssh-hostname'])
     except Exception as error:
         status = 'Unhandled exception: {}'.format(error)
@@ -145,12 +146,14 @@ def _run(cmd, env=None):
     Note: The previous behavior was to run the command locally if SSH wasn't
     configured, but that can lead to cases where execution succeeds when you'd
     expect it not to.
+
+    :param cmd: The command to run
+    :param env: Deprecated
+    :return: A tuple of (stdout, stderr)
     """
     if isinstance(cmd, str):
-        cmd = shlex.split(cmd)
-
-    if type(cmd) is not list:
-        cmd = [cmd]
+        cmd = cmd.replace(r"'", r"\\\'")
+        cmd = cmd.replace(r'"', r'\\\"')
 
     cfg = get_config()
 
@@ -166,6 +169,9 @@ def _run(cmd, env=None):
                 return ssh(cmd, host, user, passwd, key)
 
     raise Exception("Invalid SSH credentials.")
+
+
+run = _run
 
 
 def get_ssh_client(host, user, password=None, key=None):
@@ -222,19 +228,71 @@ def sftp(local_file, remote_file, host, user, password=None, key=None):
     client.close()
 
 
-def ssh(cmd, host, user, password=None, key=None):
-    """Run an arbitrary command over SSH."""
+def ssh(cmd, host, user, password=None, key=None, timeout=300):
+    """Run an arbitrary command over SSH.
+
+    :param cmd:
+    :param host:
+    :param user:
+    :param password:
+    :param key:
+    :param timeout:
+
+    :return Tuple of (stdout, stderr)
+    """
     client = get_ssh_client(host, user, password, key)
 
-    cmds = ' '.join(cmd)
+    if isinstance(cmd, list):
+        cmds = ' '.join(cmd)
+    else:
+        cmds = cmd
+
     stdin, stdout, stderr = client.exec_command(cmds, get_pty=True)
+
+    # Read the buffered output
+    output = get_exec_command_output(stdout.channel, timeout)
+
     retcode = stdout.channel.recv_exit_status()
+
     client.close()  # @TODO re-use connections
     if retcode > 0:
         output = stderr.read().strip()
         raise CalledProcessError(returncode=retcode, cmd=cmd,
                                  output=output)
     return (
-        stdout.read().decode('utf-8').strip(),
+        output,
         stderr.read().decode('utf-8').strip()
     )
+
+
+def get_exec_command_output(channel, timeout):
+    """Get the output from exec_command.
+
+    :param channel: The paramiko.channel object.
+    :param timeout: How long to wait for output from the command.
+
+    :return: The value return of the command (stdout)
+    """
+    # Test file is 178M, but this read is WAY too slow
+    bufsize = 1024 * 512
+    stdout = b""
+    starttime = time.time()
+
+    while(time.time() < starttime + timeout):
+        if channel.recv_ready():
+            data = channel.recv(bufsize)
+
+            if len(data) == 0:
+                break
+
+            stdout += data
+
+        if channel.exit_status_ready():
+            break
+
+        time.sleep(0.001)
+
+    if isinstance(stdout, bytes):
+        stdout = stdout.decode('utf-8')
+
+    return stdout

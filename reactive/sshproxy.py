@@ -38,6 +38,8 @@ from charms.reactive import (
 import charms.sshproxy
 import os
 import subprocess
+import textwrap
+
 
 # Register a trigger so that we can respond to config.changed, even if
 # it's being cleared by another handler
@@ -78,6 +80,7 @@ def ssh_configured():
 
         log("Verifying ssh credentials...", DEBUG)
         (verified, output) = charms.sshproxy.verify_ssh_credentials()
+
         if verified:
             log("SSH credentials verified.", DEBUG)
             set_flag('sshproxy.configured')
@@ -127,11 +130,13 @@ def action_generate_ssh_key():
     If there is an existing keypair for this unit, it will be overwritten.
     """
     try:
-        if not generate_ssh_key():
-            action_fail('Unable to generate ssh key.')
+        if in_action_context():
+            if not generate_ssh_key():
+                action_fail('Unable to generate ssh key.')
     except subprocess.CalledProcessError as e:
-        action_fail('Command failed: %s (%s)' %
-                    (' '.join(e.cmd), str(e.output)))
+        if in_action_context():
+            action_fail('Command failed: %s (%s)' %
+                        (' '.join(e.cmd), str(e.output)))
     finally:
         clear_flag('actions.generate-ssh-key')
 
@@ -151,10 +156,12 @@ def get_ssh_public_key():
 def action_get_ssh_public_key():
     """Get the public SSH key of this unit."""
     try:
-        action_set({'pubkey': get_ssh_public_key()})
+        if in_action_context():
+            action_set({'pubkey': get_ssh_public_key()})
     except subprocess.CalledProcessError as e:
-        action_fail('Command failed: %s (%s)' %
-                    (' '.join(e.cmd), str(e.output)))
+        if in_action_context():
+            action_fail('Command failed: %s (%s)' %
+                        (' '.join(e.cmd), str(e.output)))
     finally:
         clear_flag('actions.get-ssh-public-key')
 
@@ -166,44 +173,67 @@ def action_verify_ssh_credentials():
     Attempts to run a stock command - `hostname` on the remote host.
     """
     try:
-        (verified, output) = charms.sshproxy.verify_ssh_credentials()
-        action_set({
-            'output': output,
-            'verified': verified,
-        })
-        if not verified:
-            action_fail("Verification failed: {}".format(
-                output,
-            ))
+        if in_action_context():
+            (verified, output) = charms.sshproxy.verify_ssh_credentials()
+            action_set({
+                'output': output,
+                'verified': verified,
+            })
+            if not verified:
+                action_fail("Verification failed: {}".format(
+                    output,
+                ))
     finally:
         clear_flag('actions.verify-ssh-credentials')
 
 
 @when('actions.run')
-def run_command():
+def action_run_command():
+    """Execute the run command via action."""
+    try:
+        if in_action_context():
+            cmd = action_get('command')
+            output, err = run_command(cmd)
+            if len(err):
+                action_fail("Command '{}' returned error code {}".format(cmd, err))
+            else:
+                if isinstance(output, bytes):
+                    action_set({'output': output[:100000]})
+                elif isinstance(output, str):
+                    action_set({
+                        'output': textwrap.shorten(output, width=100000)
+                    })
+                else:
+                    action_set({'output': output})
+    except subprocess.CalledProcessError as e:
+        if in_action_context():
+            action_fail('Command failed: %s (%s)' %
+                        (' '.join(e.cmd), str(e.output)))
+    finally:
+        clear_flag('actions.run')
+
+
+def run_command(cmd):
     """Run an arbitrary command.
 
     Run an arbitrary command, either locally or over SSH with the configured
     credentials.
+
+    :param cmd str: The command to be executed.
+    :returns: A tuple of (stdout, stderr)
     """
-    try:
-        cmd = action_get('command')
-        output, err = charms.sshproxy._run(cmd)
-        if len(err):
-            action_fail("Command '{}' returned error code {}".format(cmd, err))
-        else:
-            action_set({'output': output})
-    except subprocess.CalledProcessError as e:
-        action_fail('Command failed: %s (%s)' %
-                    (' '.join(e.cmd), str(e.output)))
-    finally:
-        clear_flag('actions.run')
+    output, err = charms.sshproxy._run(cmd)
+    return (output, err)
 
 
 @when_not('sshproxy.installed')
 def install_vnf_ubuntu_proxy():
     """Install and Configure SSH Proxy."""
-
     log("Generating SSH key...", DEBUG)
     generate_ssh_key()
     set_flag('sshproxy.installed')
+
+
+def in_action_context():
+    """Determine whether we're running on an action context."""
+    return 'JUJU_ACTION_UUID' in os.environ
