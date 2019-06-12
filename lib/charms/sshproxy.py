@@ -17,6 +17,7 @@
 ##
 
 from charmhelpers.core import unitdata
+from charmhelpers.core.hookenv import log
 
 import io
 import ipaddress
@@ -32,6 +33,7 @@ from subprocess import (
     PIPE,
 )
 import time
+import traceback
 
 
 def get_config():
@@ -58,6 +60,7 @@ def get_host_ip():
 
 def is_valid_hostname(hostname):
     """Validate the ssh-hostname."""
+    log("Hostname: {}".format(hostname))
     if hostname == "0.0.0.0":
         return False
 
@@ -79,15 +82,41 @@ def verify_ssh_credentials():
     cfg = get_config()
 
     try:
-        host = get_host_ip()
-        if is_valid_hostname(host):
-            if len(cfg['ssh-hostname']) and len(cfg['ssh-username']):
-                cmd = 'hostname'
-                status, err = _run(cmd)
-                if len(err) == 0:
-                    verified = True
-        else:
-            status = "Invalid IP address."
+
+        # When used against a host that's just started, the ssh service may not be running yet.
+        # Automatically retry the verification five times, with an incrementally longer sleep
+        # between attempts.
+        retries = 5
+        attempt = 0
+
+        while attempt <= retries:
+            try:
+                attempt += 1
+
+                host = get_host_ip()
+                if is_valid_hostname(host):
+                    if len(cfg['ssh-hostname']) and len(cfg['ssh-username']):
+                        cmd = 'hostname'
+
+                        status, err = _run(cmd)
+
+                        if len(err) == 0:
+                            verified = True
+                        break
+                else:
+                    status = "Invalid IP address."
+                    raise paramiko.ssh_exception.NoValidConnectionsError({(host, "22")
+
+            except paramiko.ssh_exception.NoValidConnectionsError as e:
+                # Unable to connect to port % on %
+                status = "Retrying: {}".format(e)
+
+                # Incrementally back off the wait between retry attempts.
+                time.sleep(5 * attempt)
+            except Exception as e:
+                raise e
+
+
     except CalledProcessError as e:
         status = 'Command failed: {} ({})'.format(
             ' '.join(e.cmd),
@@ -105,7 +134,8 @@ def verify_ssh_credentials():
     except socket.timeout:
         status = "Timeout attempting to reach {}".format(cfg['ssh-hostname'])
     except Exception as error:
-        status = 'Unhandled exception: {}'.format(error)
+        tb = traceback.format_exc()
+        status = 'Unhandled exception: {}'.format(tb)
 
     return (verified, status)
 

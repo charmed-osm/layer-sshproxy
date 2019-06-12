@@ -47,7 +47,8 @@ register_trigger(when='config.changed',
                  set_flag='sshproxy.reconfigure')
 
 
-@when_any('config.changed', 'sshproxy.reconfigure')
+# @when_any('config.changed', 'sshproxy.reconfigure')
+@when_any('config.set.ssh-hostname', 'config.set.ssh-username', 'config.set.ssh-password', 'sshproxy.reconfigure')
 def ssh_configured():
     """Check if charm is properly configured.
 
