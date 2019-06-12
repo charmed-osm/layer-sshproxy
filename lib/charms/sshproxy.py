@@ -26,14 +26,11 @@ import os
 import socket
 import shlex
 
-
 from subprocess import (
     Popen,
     CalledProcessError,
     PIPE,
 )
-import time
-import traceback
 
 
 def get_config():
@@ -82,42 +79,16 @@ def verify_ssh_credentials():
     cfg = get_config()
 
     try:
+        host = get_host_ip()
+        if is_valid_hostname(host):
+            if len(cfg['ssh-hostname']) and len(cfg['ssh-username']):
+                cmd = 'hostname'
+                status, err = _run(cmd)
 
-        # When used against a host that's just started, the ssh service may not be running yet.
-        # Automatically retry the verification five times, with an incrementally longer sleep
-        # between attempts.
-        retries = 5
-        attempt = 0
-
-        while attempt <= retries:
-            try:
-                attempt += 1
-
-                host = get_host_ip()
-                if is_valid_hostname(host):
-                    if len(cfg['ssh-hostname']) and len(cfg['ssh-username']):
-                        cmd = 'hostname'
-
-                        status, err = _run(cmd)
-
-                        if len(err) == 0:
-                            verified = True
-                        break
-                else:
-                    status = "Invalid IP address."
-
-                    raise paramiko.ssh_exception.NoValidConnectionsError({("0.0.0.0", "22"): Exception(status)})
-
-            except paramiko.ssh_exception.NoValidConnectionsError as e:
-                # Unable to connect to port % on %
-                status = "Retrying: {}".format(e)
-
-                # Incrementally back off the wait between retry attempts.
-                time.sleep(5 * attempt)
-            except Exception as e:
-                raise e
-
-
+                if len(err) == 0:
+                    verified = True
+        else:
+            status = "Invalid IP address."
     except CalledProcessError as e:
         status = 'Command failed: {} ({})'.format(
             ' '.join(e.cmd),
@@ -132,7 +103,7 @@ def verify_ssh_credentials():
             e.expected_key,
             e.got_key,
         )
-    except socket.timeout:
+    except (TimeoutError, socket.timeout):
         status = "Timeout attempting to reach {}".format(cfg['ssh-hostname'])
     except Exception as error:
         tb = traceback.format_exc()
@@ -177,14 +148,12 @@ def _run(cmd, env=None):
     Note: The previous behavior was to run the command locally if SSH wasn't
     configured, but that can lead to cases where execution succeeds when you'd
     expect it not to.
-
-    :param cmd: The command to run
-    :param env: Deprecated
-    :return: A tuple of (stdout, stderr)
     """
     if isinstance(cmd, str):
-        cmd = cmd.replace(r"'", r"\\\'")
-        cmd = cmd.replace(r'"', r'\\\"')
+        cmd = shlex.split(cmd)
+
+    if type(cmd) is not list:
+        cmd = [cmd]
 
     cfg = get_config()
 
@@ -200,9 +169,6 @@ def _run(cmd, env=None):
                 return ssh(cmd, host, user, passwd, key)
 
     raise Exception("Invalid SSH credentials.")
-
-
-run = _run
 
 
 def get_ssh_client(host, user, password=None, key=None):
@@ -259,71 +225,19 @@ def sftp(local_file, remote_file, host, user, password=None, key=None):
     client.close()
 
 
-def ssh(cmd, host, user, password=None, key=None, timeout=300):
-    """Run an arbitrary command over SSH.
-
-    :param cmd:
-    :param host:
-    :param user:
-    :param password:
-    :param key:
-    :param timeout:
-
-    :return Tuple of (stdout, stderr)
-    """
+def ssh(cmd, host, user, password=None, key=None):
+    """Run an arbitrary command over SSH."""
     client = get_ssh_client(host, user, password, key)
 
-    if isinstance(cmd, list):
-        cmds = ' '.join(cmd)
-    else:
-        cmds = cmd
-
+    cmds = ' '.join(cmd)
     stdin, stdout, stderr = client.exec_command(cmds, get_pty=True)
-
-    # Read the buffered output
-    output = get_exec_command_output(stdout.channel, timeout)
-
     retcode = stdout.channel.recv_exit_status()
-
     client.close()  # @TODO re-use connections
     if retcode > 0:
         output = stderr.read().strip()
         raise CalledProcessError(returncode=retcode, cmd=cmd,
                                  output=output)
     return (
-        output,
+        stdout.read().decode('utf-8').strip(),
         stderr.read().decode('utf-8').strip()
     )
-
-
-def get_exec_command_output(channel, timeout):
-    """Get the output from exec_command.
-
-    :param channel: The paramiko.channel object.
-    :param timeout: How long to wait for output from the command.
-
-    :return: The value return of the command (stdout)
-    """
-    # Test file is 178M, but this read is WAY too slow
-    bufsize = 1024 * 512
-    stdout = b""
-    starttime = time.time()
-
-    while(time.time() < starttime + timeout):
-        if channel.recv_ready():
-            data = channel.recv(bufsize)
-
-            if len(data) == 0:
-                break
-
-            stdout += data
-
-        if channel.exit_status_ready():
-            break
-
-        time.sleep(0.001)
-
-    if isinstance(stdout, bytes):
-        stdout = stdout.decode('utf-8')
-
-    return stdout
