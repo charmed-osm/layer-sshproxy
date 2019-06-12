@@ -105,7 +105,8 @@ def verify_ssh_credentials():
                         break
                 else:
                     status = "Invalid IP address."
-                    raise paramiko.ssh_exception.NoValidConnectionsError({(host, "22")
+
+                    raise paramiko.ssh_exception.NoValidConnectionsError({("0.0.0.0", "22"): Exception(status)})
 
             except paramiko.ssh_exception.NoValidConnectionsError as e:
                 # Unable to connect to port % on %
