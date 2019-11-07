@@ -85,7 +85,7 @@ def ssh_configured():
             status_set('active', 'Ready!')
         else:
             clear_flag('sshproxy.configured')
-            status_set('blocked', "Verification failed: {}".format(output))
+            status_set('blocked', "Remote machine not ready yet: {}".format(output))
     else:
         log("No ssh credentials configured", DEBUG)
         clear_flag('sshproxy.configured')

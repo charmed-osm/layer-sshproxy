@@ -25,6 +25,7 @@ import paramiko
 import os
 import socket
 import shlex
+import traceback
 
 from subprocess import (
     Popen,
