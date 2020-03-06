@@ -110,7 +110,7 @@ timing:
 
 
 # Contact Information
-Homepage: https://github.com/AdamIsrael/layer-sshproxy
+Homepage: https://github.com/charmed-osm/layer-sshproxy
 
 [Juju]: https://jujucharms.com/about
 [configure]: https://jujucharms.com/docs/2.0/charms-config
